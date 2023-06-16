@@ -48,11 +48,15 @@ Especial thanks:
 
 <div style="display: flex">
   <a href="https://github.com/benben6515" style="margin-right: 1rem">
-    <img style="border-radius: 50%" src="https://avatars.githubusercontent.com/u/61361198?s=40&v=4" />
+    <div style="border-radius: 50%">
+      <img src="https://avatars.githubusercontent.com/u/61361198?s=40&v=4" />
+    </div>
     <div>Benben</div>
   </a>
   <a href="https://github.com/Peter-Liao-github">
-    <img style="border-radius: 50%" src="https://avatars.githubusercontent.com/u/30005366?s=40&v=4" />
+    <div style="border-radius: 50%">
+      <img src="https://avatars.githubusercontent.com/u/30005366?s=40&v=4" />
+    </div>
     <div>Peter</div>
   </a>
 </div>
