@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import type { ChangeEvent } from 'react'
+import '../i18n/config'
+import { useTranslation } from 'react-i18next'
 
 const columClass = 'py-4 w-full flex justify-between space-x-4'
 
 function App() {
+  const { t } = useTranslation()
   const [progressLength, setProgressLength] = useState('15')
   const [totalValue, setTotalValue] = useState('100')
   const [currentValue, setCurrentValue] = useState('20')
@@ -38,7 +41,7 @@ function App() {
   return (
     <>
       <section className="w-full">
-        <h3 className="text-teal-500 text-lg font-bold">Progress bar</h3>
+        <h3 className="text-teal-500 text-lg font-bold">{t('progressBar')}</h3>
 
         <div className={columClass}>
           <label>Total value: </label>
@@ -64,7 +67,7 @@ function App() {
 
         <div className={columClass}>
           <div>
-            Output: <span>{showValue()}</span>
+            Preview: <span>{showValue()}</span>
           </div>
         </div>
         <div className={columClass}>
