@@ -1,5 +1,6 @@
 import notionLogo from '../src/assets/Notion_app_logo.png'
 import ProgressBar from './components/ProgressBar'
+import I18nToggle from './components/I18nToggle'
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
             <img src={notionLogo} className="logo notion" alt="Notion logo" />
           </a>
         </div>
-
+        <I18nToggle />
         <ProgressBar />
       </main>
     </>
