@@ -4,5 +4,22 @@
   "description": {
     "part1": "範例範例",
     "part2": "😉"
+  },
+  "fields": {
+    "totalValue": "目標值",
+    "currentValue": "現在值",
+    "totalValueName": "目標值名稱",
+    "currentValueName": "現在值名稱",
+    "startChar": "開始字元",
+    "endChar": "結束字元",
+    "progressLength": "進度條總長",
+    "preview": "預覽",
+    "output": "輸出"
+  },
+  "notify": {
+    "alert": {
+      "copySuccess": "複製成功！",
+      "copyError": "複製失敗："
+    }
   }
 }

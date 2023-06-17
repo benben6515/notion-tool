@@ -13,7 +13,7 @@ function I18nToggle() {
 
   return (
     <>
-      <section className="border rounded-sm flex justify-center p-2">
+      <section className="border rounded-sm flex justify-center p-2 w-48">
         <label className="relative inline-flex items-center cursor-pointer">
           <input type="checkbox" checked={isLocaleEn} onChange={updateIsLocaleEn} className="sr-only w-0 peer" />
           <span className="text-sm font-medium text-gray-900 dark:text-gray-300">Language:</span>

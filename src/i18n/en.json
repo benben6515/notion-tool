@@ -4,5 +4,22 @@
   "description": {
     "part1": "This is a simple example.",
     "part2": "😉"
+  },
+  "fields": {
+    "totalValue": "Total value",
+    "currentValue": "Current value",
+    "totalValueName": "Total value name",
+    "currentValueName": "Current value name",
+    "startChar": "Start Char",
+    "endChar": "End Char",
+    "progressLength": "Progress length",
+    "preview": "Preview",
+    "output": "Output"
+  },
+  "notify": {
+    "alert": {
+      "copySuccess": "Content copied to clipboard!",
+      "copyError": "Failed to copy: "
+    }
   }
 }
