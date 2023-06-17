@@ -9,6 +9,7 @@ We hope this notion tools can help you boost your productivity.
   <span> | </span>
   <a href="./README.zh-tw.md">繁體中文</a>
 </div>
+<hr />
 
 - [Demo](https://notion-tool.netlify.app/)
 - [Repo](https://github.com/benben6515/notion-tool)
@@ -42,22 +43,17 @@ pnpm dev
 # happing coding
 ```
 
+## License
+
+[MIT](./LICENSE) License © 2023 ~ present [Benben](https://github.com/benben6515)
+
 ## Credit
 
 Especial thanks:
 
-<div style="display: flex">
-  <a href="https://github.com/benben6515" style="margin-right: 1rem">
-    <div style="border-radius: 50%">
-      <img src="https://avatars.githubusercontent.com/u/61361198?s=40&v=4" />
-    </div>
-    <div>Benben</div>
-  </a>
-  <a href="https://github.com/Peter-Liao-github">
-    <div style="border-radius: 50%">
-      <img src="https://avatars.githubusercontent.com/u/30005366?s=40&v=4" />
-    </div>
-    <div>Peter</div>
+<div style="width: 100%;">
+  <a href="https://github.com/benben6515/notion-tool">
+    <img src="./public/members.svg" style="width: 100%;" alt="Click to see the source">
   </a>
 </div>
 

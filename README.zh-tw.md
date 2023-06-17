@@ -9,6 +9,7 @@
   <span> | </span>
   <a href="./README.zh-tw.md">繁體中文</a>
 </div>
+<hr />
 
 - [範例](https://notion-tool.netlify.app/)
 - [專案](https://github.com/benben6515/notion-tool)
@@ -44,7 +45,7 @@ pnpm dev
 
 ## 使用許可證
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) License © 2023 ~ present [Benben](https://github.com/benben6515)
 
 ## 致謝
 
@@ -52,15 +53,11 @@ pnpm dev
 
 <div style="display: flex">
   <a href="https://github.com/benben6515" style="margin-right: 1rem">
-    <div style="border-radius: 50%">
-      <img src="https://avatars.githubusercontent.com/u/61361198?s=40&v=4" />
-    </div>
+      <img src="https://avatars.githubusercontent.com/u/61361198?s=40&v=4" style="border-radius: 50%;" />
     <div>Benben</div>
   </a>
   <a href="https://github.com/Peter-Liao-github">
-    <div style="border-radius: 50%">
-      <img src="https://avatars.githubusercontent.com/u/30005366?s=40&v=4" />
-    </div>
+      <img src="https://avatars.githubusercontent.com/u/30005366?s=40&v=4" style="border-radius: 50%;" />
     <div>Peter</div>
   </a>
 </div>
