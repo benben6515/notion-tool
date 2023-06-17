@@ -51,9 +51,14 @@ pnpm dev
 
 Especial thanks:
 
-<div style="width: 100%;">
-  <a href="https://github.com/benben6515/notion-tool">
-    <img src="./public/members.svg" style="width: 100%;" alt="Click to see the source">
+<div style="display: flex">
+  <a href="https://github.com/benben6515" style="margin-right: 1rem">
+      <img src="https://avatars.githubusercontent.com/u/61361198?s=40&v=4" style="border-radius: 50%;" />
+    <div>Benben</div>
+  </a>
+  <a href="https://github.com/Peter-Liao-github">
+      <img src="https://avatars.githubusercontent.com/u/30005366?s=40&v=4" style="border-radius: 50%;" />
+    <div>Peter</div>
   </a>
 </div>
 
