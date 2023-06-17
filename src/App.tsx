@@ -5,14 +5,19 @@ import I18nToggle from './components/I18nToggle'
 function App() {
   return (
     <>
-      <main className="flex flex-col justify-start items-center">
-        <div className="w-40 h-40 pa-8 flex justify-center">
-          <a href="https://notion.so" target="_blank">
-            <img src={notionLogo} className="logo notion" alt="Notion logo" />
-          </a>
-        </div>
-        <I18nToggle />
-        <ProgressBar />
+      <main>
+        <nav className="flex justify-end items-center w-screen">
+          <I18nToggle />
+        </nav>
+
+        <section className="flex flex-col justify-center items-center pb-8 w-3/4 max-w-3xl mx-auto">
+          <div className="w-40 h-40 pa-8 flex justify-center">
+            <a href="https://notion.so" target="_blank">
+              <img src={notionLogo} className="logo notion" alt="Notion logo" />
+            </a>
+          </div>
+          <ProgressBar />
+        </section>
       </main>
     </>
   )
