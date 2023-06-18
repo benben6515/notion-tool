@@ -3,6 +3,7 @@ import type { ChangeEvent } from 'react'
 import '../i18n/config'
 import { useTranslation } from 'react-i18next'
 import { useCopy } from '../hooks/useCopy'
+import LabelTooltip from './Tooltips/LabelTooltip'
 
 const columClass = 'py-4 w-full flex justify-between space-x-4'
 
@@ -83,7 +84,7 @@ function App() {
         <h3 className="text-teal-500 text-2xl font-bold">{t('progressBar')}</h3>
 
         <div className={columClass}>
-          <label>{t('fields.totalValueName')}: </label>
+          <label>{t('fields.totalValueName')}:</label>
           <input type="text" value={totalValueName} min="1" onChange={updateTotalValueName} />
         </div>
         <div className={columClass}>
@@ -99,7 +100,10 @@ function App() {
           <input type="text" value={endChar} onChange={updateEndChar} />
         </div>
         <div className={columClass}>
-          <label>{t('fields.progressLength')}: </label>
+          <label className="flex items-center">
+            <span>{t('fields.progressLength')}</span>
+            <span className="flex ml-1">{LabelTooltip(t('fields.progressLengthTip'))}</span>
+          </label>
           <input type="number" value={progressLength} min="1" onChange={updateProgressLength} />
         </div>
         <hr />
