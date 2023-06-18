@@ -3,10 +3,20 @@ import type { ChangeEvent } from 'react'
 import '../i18n/config'
 import { useTranslation } from 'react-i18next'
 import { useCopy } from '../hooks/useCopy'
+import type { CustomFlowbiteTheme } from 'flowbite-react'
 import { TextInput } from 'flowbite-react'
 import LabelTooltip from './Tooltips/LabelTooltip'
 
 const columClass = 'py-4 w-full flex justify-between space-x-4'
+const customTheme: CustomFlowbiteTheme['textInput'] = {
+  field: {
+    input: {
+      colors: {
+        gray: 'dark:bg-[#3B3B3B] focus:dark:border-[#555555]',
+      },
+    },
+  },
+}
 
 function App() {
   const { t } = useTranslation()
@@ -86,26 +96,32 @@ function App() {
 
         <div className={columClass}>
           <label>{t('fields.totalValueName')}</label>
-          <TextInput type="text" value={totalValueName} min="1" onChange={updateTotalValueName} />
+          <TextInput theme={customTheme} type="text" value={totalValueName} min="1" onChange={updateTotalValueName} />
         </div>
         <div className={columClass}>
           <label>{t('fields.currentValueName')}</label>
-          <TextInput type="text" value={currentValueName} min="1" onChange={updateCurrentValueName} />
+          <TextInput
+            theme={customTheme}
+            type="text"
+            value={currentValueName}
+            min="1"
+            onChange={updateCurrentValueName}
+          />
         </div>
         <div className={columClass}>
           <label>{t('fields.startChar')}</label>
-          <TextInput type="text" value={startChar} onChange={updateStartChar} />
+          <TextInput theme={customTheme} type="text" value={startChar} onChange={updateStartChar} />
         </div>
         <div className={columClass}>
           <label>{t('fields.endChar')}</label>
-          <TextInput type="text" value={endChar} onChange={updateEndChar} />
+          <TextInput theme={customTheme} type="text" value={endChar} onChange={updateEndChar} />
         </div>
         <div className={columClass}>
           <label className="flex items-center">
             <span>{t('fields.progressLength')}</span>
             <span className="flex ml-1">{LabelTooltip(t('fields.progressLengthTip'))}</span>
           </label>
-          <TextInput type="number" value={progressLength} min="1" onChange={updateProgressLength} />
+          <TextInput theme={customTheme} type="number" value={progressLength} min="1" onChange={updateProgressLength} />
         </div>
         <hr />
 
@@ -114,7 +130,7 @@ function App() {
         </div>
         <div className="w-full flex justify-between space-x-4">
           <label>{t('fields.totalValue')}</label>
-          <TextInput type="number" value={totalValue} min="1" onChange={updateTotalValue} />
+          <TextInput theme={customTheme} type="number" value={totalValue} min="1" onChange={updateTotalValue} />
         </div>
         <div className="py-4 w-full flex justify-between space-x-4">
           <label>{t('fields.currentValue')}</label>

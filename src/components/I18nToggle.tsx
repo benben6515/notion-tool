@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import i18n from 'i18next'
 import '../i18n/config'
-import { useTranslation } from 'react-i18next'
 import { Button } from 'flowbite-react'
 
 function I18nToggle() {
-  const { t } = useTranslation()
   const [isLocaleEn, setIsLocaleEn] = useState(true)
   const updateIsLocaleEn = () => {
     setIsLocaleEn(!isLocaleEn)
