@@ -15,7 +15,8 @@
     "progressLength": "進度條總長",
     "progressLengthTip": "影響進度條細緻度：當前進度顯示較為精細",
     "preview": "預覽",
-    "output": "輸出"
+    "output": "輸出",
+    "outputTip": "點擊下方文字直接複製"
   },
   "notify": {
     "alert": {
