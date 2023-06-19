@@ -4,7 +4,7 @@ import '../i18n/config'
 import { useTranslation } from 'react-i18next'
 import { useCopy } from '../hooks/useCopy'
 import type { CustomFlowbiteTheme } from 'flowbite-react'
-import { TextInput } from 'flowbite-react'
+import { Button, TextInput } from 'flowbite-react'
 import LabelTooltip from './Tooltips/LabelTooltip'
 
 const columClass = 'py-4 w-full flex justify-between space-x-4'
@@ -29,6 +29,7 @@ function App() {
   const [startChar, setStartChar] = useState('★')
   const [endChar, setEndChar] = useState('☆')
   const [templateText, setTemplateText] = useState('')
+  const [isStartCharListExpand, setIsStartCharListExpand] = useState(false)
 
   const updateCurrentValueName = (e: ChangeEvent<HTMLInputElement>) => setCurrentValueName(e.target.value)
   const updateTotalValueName = (e: ChangeEvent<HTMLInputElement>) => setTotalValueName(e.target.value)
@@ -89,6 +90,10 @@ function App() {
     await copyContent(templateText)
   }
 
+  function onCharExpand() {
+    setIsStartCharListExpand(!isStartCharListExpand)
+  }
+
   return (
     <>
       <section className="w-full">
@@ -108,14 +113,47 @@ function App() {
             onChange={updateCurrentValueName}
           />
         </div>
+
         <div className={columClass}>
           <label>{t('fields.startChar')}</label>
-          <TextInput theme={customTheme} type="text" value={startChar} onChange={updateStartChar} />
+          <div>
+            <div className="flex justify-end">
+              {/* TODO: 3-buttons group here */}
+              <TextInput
+                theme={customTheme}
+                type="text"
+                value={startChar}
+                onChange={updateStartChar}
+                placeholder="Enter manually"
+              />
+            </div>
+            <div className="my-2 flex items-center cursor-pointer" onClick={onCharExpand}>
+              <div className={`flex mr-2 transform ${isStartCharListExpand ? 'rotate-90' : ''}`}>
+                <svg
+                  className="w-3"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                  />
+                </svg>
+              </div>
+              <span>more default characters</span>
+            </div>
+            {isStartCharListExpand ? <div>TODO: buttons group here</div> : null}
+          </div>
         </div>
+
         <div className={columClass}>
           <label>{t('fields.endChar')}</label>
           <TextInput theme={customTheme} type="text" value={endChar} onChange={updateEndChar} />
         </div>
+
         <div className={columClass}>
           <label className="flex items-center">
             <span>{t('fields.progressLength')}</span>
