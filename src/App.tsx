@@ -7,7 +7,9 @@ function App() {
     <>
       <main>
         <nav className="flex justify-end items-center w-screen">
-          <I18nToggle />
+          <div className="fixed right-2 top-20">
+            <I18nToggle />
+          </div>
         </nav>
 
         <section className="flex flex-col justify-center items-center pb-8 w-3/4 max-w-3xl mx-auto">

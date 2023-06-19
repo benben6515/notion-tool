@@ -3,8 +3,20 @@ import type { ChangeEvent } from 'react'
 import '../i18n/config'
 import { useTranslation } from 'react-i18next'
 import { useCopy } from '../hooks/useCopy'
+import type { CustomFlowbiteTheme } from 'flowbite-react'
+import { TextInput } from 'flowbite-react'
+import LabelTooltip from './Tooltips/LabelTooltip'
 
 const columClass = 'py-4 w-full flex justify-between space-x-4'
+const customTheme: CustomFlowbiteTheme['textInput'] = {
+  field: {
+    input: {
+      colors: {
+        gray: 'dark:bg-[#3B3B3B] focus:dark:border-[#555555]',
+      },
+    },
+  },
+}
 
 function App() {
   const { t } = useTranslation()
@@ -83,39 +95,48 @@ function App() {
         <h3 className="text-teal-500 text-2xl font-bold">{t('progressBar')}</h3>
 
         <div className={columClass}>
-          <label>{t('fields.totalValueName')}: </label>
-          <input type="text" value={totalValueName} min="1" onChange={updateTotalValueName} />
+          <label>{t('fields.totalValueName')}</label>
+          <TextInput theme={customTheme} type="text" value={totalValueName} min="1" onChange={updateTotalValueName} />
         </div>
         <div className={columClass}>
-          <label>{t('fields.currentValueName')}: </label>
-          <input type="text" value={currentValueName} min="1" onChange={updateCurrentValueName} />
+          <label>{t('fields.currentValueName')}</label>
+          <TextInput
+            theme={customTheme}
+            type="text"
+            value={currentValueName}
+            min="1"
+            onChange={updateCurrentValueName}
+          />
         </div>
         <div className={columClass}>
-          <label>{t('fields.startChar')}: </label>
-          <input type="text" value={startChar} onChange={updateStartChar} />
+          <label>{t('fields.startChar')}</label>
+          <TextInput theme={customTheme} type="text" value={startChar} onChange={updateStartChar} />
         </div>
         <div className={columClass}>
-          <label>{t('fields.endChar')}: </label>
-          <input type="text" value={endChar} onChange={updateEndChar} />
+          <label>{t('fields.endChar')}</label>
+          <TextInput theme={customTheme} type="text" value={endChar} onChange={updateEndChar} />
         </div>
         <div className={columClass}>
-          <label>{t('fields.progressLength')}: </label>
-          <input type="number" value={progressLength} min="1" onChange={updateProgressLength} />
+          <label className="flex items-center">
+            <span>{t('fields.progressLength')}</span>
+            <span className="flex ml-1">{LabelTooltip(t('fields.progressLengthTip'))}</span>
+          </label>
+          <TextInput theme={customTheme} type="number" value={progressLength} min="1" onChange={updateProgressLength} />
         </div>
         <hr />
 
         <div className={columClass}>
-          <div>{t('fields.preview')}:</div>
+          <div className="text-teal-500 text-lg font-bold">{t('fields.preview')}</div>
         </div>
         <div className="w-full flex justify-between space-x-4">
-          <label>{t('fields.totalValue')}: </label>
-          <input type="number" value={totalValue} min="1" onChange={updateTotalValue} />
+          <label>{t('fields.totalValue')}</label>
+          <TextInput theme={customTheme} type="number" value={totalValue} min="1" onChange={updateTotalValue} />
         </div>
-        <div className="w-full flex justify-between space-x-4">
-          <label>{t('fields.currentValue')}: </label>
+        <div className="py-4 w-full flex justify-between space-x-4">
+          <label>{t('fields.currentValue')}</label>
           <span className="flex items-center">
+            <span className="w-6 mx-4">{currentValue}</span>
             <input type="range" max={totalValue} min="0" step="1" value={currentValue} onChange={updateCurrentValue} />
-            <span className="w-6 ml-4">{currentValue}</span>
           </span>
         </div>
         <div className={columClass}>
@@ -124,11 +145,14 @@ function App() {
           </div>
         </div>
 
-        <div className={columClass}>{t('fields.output')}:</div>
+        <div className="text-teal-500 text-lg font-bold flex items-center">
+          <p>{t('fields.output')}</p>
+          <span className="flex ml-1 text-teal-500">{LabelTooltip(t('fields.outputTip'))}</span>
+        </div>
         <div className={columClass}>
           <button
             onClick={onClickOutput}
-            className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
           >
             <p className="font-normal text-gray-700 dark:text-gray-400 text-start">{templateText}</p>
           </button>
