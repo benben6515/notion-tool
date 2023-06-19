@@ -170,7 +170,7 @@ function App() {
                 type="text"
                 // value={startChar}
                 onChange={updateStartChar}
-                placeholder="Enter manually"
+                placeholder={t('fields.enterCharacters')}
               />
             </div>
             <div
@@ -180,7 +180,7 @@ function App() {
               }}
             >
               {toggleListIcon(isStartCharListExpand)}
-              <span>more default characters</span>
+              <span>{t('fields.toggleCharacters')}</span>
             </div>
             {isStartCharListExpand ? (
               <div className="ml-4">{ButtonsGroup(updateStartChar, ['☑', '✱', '■', '◆'])}</div>
@@ -198,7 +198,7 @@ function App() {
                 type="text"
                 // value={endChar}
                 onChange={updateEndChar}
-                placeholder="Enter manually"
+                placeholder={t('fields.enterCharacters')}
               />
             </div>
             <div
@@ -208,7 +208,7 @@ function App() {
               }}
             >
               {toggleListIcon(isEndCharListExpand)}
-              <span>more default characters</span>
+              <span>{t('fields.toggleCharacters')}</span>
             </div>
             {isEndCharListExpand ? (
               <div className="ml-4">{ButtonsGroup(updateEndChar, ['☐', '⁎', '□', '◇'], 'endChar')}</div>

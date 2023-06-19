@@ -16,7 +16,9 @@
     "progressLengthTip": "影響進度條細緻度：當前進度顯示較為精細",
     "preview": "預覽",
     "output": "輸出",
-    "outputTip": "點擊下方文字直接複製"
+    "outputTip": "點擊下方文字直接複製",
+    "enterCharacters": "自行輸入",
+    "toggleCharacters": "更多選項"
   },
   "notify": {
     "alert": {
