@@ -4,7 +4,7 @@ import '../i18n/config'
 import { useTranslation } from 'react-i18next'
 import { useCopy } from '../hooks/useCopy'
 import type { CustomFlowbiteTheme } from 'flowbite-react'
-import { Button, TextInput } from 'flowbite-react'
+import { TextInput } from 'flowbite-react'
 import LabelTooltip from './Tooltips/LabelTooltip'
 
 const columClass = 'py-4 w-full flex justify-between space-x-4'
@@ -112,7 +112,7 @@ function App() {
   }
 
   function ButtonsGroup(onChangeHandler: Function, charsList?: string[], name?: string) {
-    const dom = []
+    const dom: any[] = []
     const chars = charsList || ['★', '✦', '●']
     const isStartChar = !name
     chars.forEach((char) => {
