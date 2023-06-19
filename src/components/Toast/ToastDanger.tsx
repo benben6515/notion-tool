@@ -5,7 +5,7 @@ function ToastDanger(i18nKey: string) {
   return (
     <div
       id={id}
-      className="hidden w-[300px] p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+      className="hidden w-[300px] p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800 z-10"
       role="alert"
     >
       <div>

@@ -1,5 +1,5 @@
 {
-  "progressBar": "Progress Bar",
+  "progressBar": "Notion Progress Maker",
   "translateSwitch": "中文",
   "description": {
     "part1": "This is a simple example.",
@@ -12,6 +12,7 @@
     "currentValueName": "Current value name",
     "startChar": "Start char",
     "endChar": "End char",
+    "isShowNumber": "Show number",
     "progressType": "Progress type",
     "progressLength": "Progress length",
     "progressLengthTip": "Impact on Progress Bar Granularity: The current progress is displayed in a more detailed manner.",

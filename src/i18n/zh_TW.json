@@ -1,5 +1,5 @@
 {
-  "progressBar": "進度條",
+  "progressBar": "進度條產生器",
   "translateSwitch": "English",
   "description": {
     "part1": "範例範例",
@@ -12,6 +12,7 @@
     "currentValueName": "現在值名稱",
     "startChar": "開始字元",
     "endChar": "結束字元",
+    "isShowNumber": "是否呈現數字",
     "progressType": "進度條類型",
     "progressLength": "進度條總長",
     "progressLengthTip": "影響進度條細緻度：當前進度顯示較為精細",

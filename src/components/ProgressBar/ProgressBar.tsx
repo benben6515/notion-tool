@@ -3,14 +3,14 @@ import type { ChangeEvent, ChangeEventHandler } from 'react'
 import '../../i18n/config'
 import { useTranslation } from 'react-i18next'
 import type { CustomFlowbiteTheme } from 'flowbite-react'
-import { TextInput, Select } from 'flowbite-react'
+import { TextInput, Select, ToggleSwitch } from 'flowbite-react'
 
 import LabelTooltip from '../Tooltips/LabelTooltip'
 import TypeBar from './TypeBar'
 import TypeSlide from './TypeSlide'
 import type { TYPE_OPTIONS_MAP_TYPE } from './types'
 
-export const columClass = 'py-4 w-full flex justify-between space-x-4'
+export const columClass = 'py-3 w-full flex justify-between space-x-4'
 export const customTheme: CustomFlowbiteTheme['textInput'] = {
   field: {
     input: {
@@ -46,6 +46,7 @@ function App() {
   const [startChar, setStartChar] = useState('★')
   const [endChar, setEndChar] = useState('☆')
   const [type, setType] = useState(TYPE_OPTIONS[0])
+  const [isShowNumber, setIsShowNumber] = useState(true)
 
   const updateCurrentValueName = (e: ChangeEvent<HTMLInputElement>) => setCurrentValueName(e.target.value)
   const updateTotalValueName = (e: ChangeEvent<HTMLInputElement>) => setTotalValueName(e.target.value)
@@ -53,6 +54,7 @@ function App() {
   const updateStartChar = (e: ChangeEvent<HTMLInputElement>) => setStartChar(e.target.value)
   const updateEndChar = (e: ChangeEvent<HTMLInputElement>) => setEndChar(e.target.value)
   const updateType = (e: ChangeEvent<HTMLSelectElement>) => setType(e.target.value)
+  const updateIsShowNumber = (checked: boolean) => setIsShowNumber(checked)
 
   const [isStartCharListExpand, setIsStartCharListExpand] = useState(false)
   const [isEndCharListExpand, setIsEndCharListExpand] = useState(false)
@@ -72,6 +74,7 @@ function App() {
             endChar={endChar}
             currentValueName={currentValueName}
             totalValueName={totalValueName}
+            isShowNumber={isShowNumber}
           />
         )
       case TYPE_OPTIONS_MAP.slide.value:
@@ -82,6 +85,7 @@ function App() {
             endChar={endChar}
             currentValueName={currentValueName}
             totalValueName={totalValueName}
+            isShowNumber={isShowNumber}
           />
         )
       default:
@@ -143,7 +147,7 @@ function App() {
   return (
     <>
       <section className="w-full">
-        <h3 className="text-teal-500 text-2xl font-bold">{t('progressBar')}</h3>
+        <h3 className="text-teal-500 text-2xl font-bold pb-2">{t('progressBar')}</h3>
 
         <div className={columClass}>
           <label>{t('fields.totalValueName')}</label>
@@ -218,7 +222,7 @@ function App() {
           <TextInput theme={customTheme} type="number" value={progressLength} min="1" onChange={updateProgressLength} />
         </div>
 
-        <div className="py-4 w-full flex space-x-4">
+        <div className="py-4 w-full flex items-center space-x-4">
           <label className="flex items-center">
             <span>{t('fields.progressType')}</span>
           </label>
@@ -229,6 +233,12 @@ function App() {
               </option>
             ))}
           </Select>
+          <span> | </span>
+          <label className="flex items-center">
+            <span>{t('fields.isShowNumber')}</span>
+          </label>
+          <ToggleSwitch label={''} checked={isShowNumber} defaultChecked onChange={updateIsShowNumber} />
+          <span> | </span>
         </div>
 
         <hr />

@@ -6,17 +6,16 @@ import { useCopy } from '../../hooks/useCopy'
 import { TextInput } from 'flowbite-react'
 import LabelTooltip from '../Tooltips/LabelTooltip'
 import { columClass, customTheme } from './ProgressBar'
+import type { TypeBarPropsType } from './types'
 
-interface TypeBarPropsType {
-  progressLength: string
-  startChar: string
-  endChar: string
-  currentValueName: string
-  totalValueName: string
-}
-
-// TODO add slide type
-function TypeSlide({ progressLength, startChar, endChar, currentValueName, totalValueName }: TypeBarPropsType) {
+function TypeSlide({
+  progressLength,
+  startChar,
+  endChar,
+  currentValueName,
+  totalValueName,
+  isShowNumber,
+}: TypeBarPropsType) {
   const { t } = useTranslation()
   const { copyContent } = useCopy()
 
@@ -33,13 +32,17 @@ function TypeSlide({ progressLength, startChar, endChar, currentValueName, total
 
   useEffect(() => {
     const startString = Array(+progressLength).fill(startChar).join('')
-    const endString = Array(+progressLength).fill(endChar).join('')
-    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "✅", slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
-+ slice("${endString}", 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
-+ " " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%")
+    let numberText = isShowNumber
+      ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%")`
+      : ')'
+    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "✅"
+, slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
++ "${endChar}"
++ slice("${startString}", 1, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
+${numberText}
 `
     setTemplateText(text)
-  }, [progressLength, startChar, endChar, currentValueName, totalValueName])
+  }, [progressLength, startChar, endChar, currentValueName, totalValueName, isShowNumber])
 
   function mapValueToProgress() {
     if (+currentValue < 0) return
@@ -47,7 +50,9 @@ function TypeSlide({ progressLength, startChar, endChar, currentValueName, total
     const startCount = Math.floor((+currentValue / +totalValue) * +progressLength)
     const endCount = +progressLength - +startCount
     if (startCount < 0 || endCount < 0) return
-    return `${Array(startCount).fill(startChar).join('')}${Array(endCount).fill(endChar).join('')}`
+    const charArray = Array(+progressLength).fill(startChar)
+    charArray.splice(startCount, 1, endChar)
+    return `${charArray.join('')}`
   }
 
   function showValue() {
@@ -56,22 +61,17 @@ function TypeSlide({ progressLength, startChar, endChar, currentValueName, total
     return `${Math.floor((+currentValue / +totalValue) * 100)} %`
   }
 
-  async function onClickOutput() {
-    console.log('click')
-    await copyContent(templateText)
-  }
+  const onClickOutput = async () => await copyContent(templateText)
 
   return (
     <>
-      <div>
-        <div className="text-teal-500 text-lg font-bold">{t('fields.preview')}</div>
-      </div>
+      <div className="text-teal-500 text-lg font-bold py-4">{t('fields.preview')}</div>
       <div className="w-full flex justify-between space-x-4">
-        <label>{t('fields.totalValue')}</label>
+        <label>{totalValueName}</label>
         <TextInput theme={customTheme} type="number" value={totalValue} min="1" onChange={updateTotalValue} />
       </div>
       <div className="py-4 w-full flex justify-between space-x-4">
-        <label>{t('fields.currentValue')}</label>
+        <label>{currentValueName}</label>
         <span className="flex items-center">
           <span className="w-6 mx-4">{currentValue}</span>
           <input type="range" max={totalValue} min="0" step="1" value={currentValue} onChange={updateCurrentValue} />

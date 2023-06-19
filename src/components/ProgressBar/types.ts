@@ -4,6 +4,7 @@ export type TypeBarPropsType = {
   endChar: string
   currentValueName: string
   totalValueName: string
+  isShowNumber: boolean
 }
 
 export type TYPE_OPTIONS_MAP_TYPE = {
