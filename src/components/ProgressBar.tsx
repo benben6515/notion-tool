@@ -91,13 +91,21 @@ function App() {
     await copyContent(templateText)
   }
 
-  function ButtonsGroup(charsList?: string[]) {
+  function ButtonsGroup(onChangeHandler: Function, charsList?: string[]) {
     const dom = []
     const chars = charsList || ['★', '✦', '●']
     chars.forEach((char) => {
       dom.push(
         <div key={'input' + char} className="h-full">
-          <input type="radio" id={char} name="hosting" value={char} className="hidden peer" required />
+          <input
+            type="radio"
+            id={char}
+            name="hosting"
+            value={char}
+            className="hidden peer"
+            required
+            onChange={onChangeHandler}
+          />
           <label
             htmlFor={char}
             className="inline-flex items-center justify-between w-full h-full px-2.5 py-1 text-gray-500 bg-white border border-[#6B7280] rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-teal-500 peer-checked:border-teal-600 peer-checked:text-teal-600 peer-checked:bg-teal-100 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -110,8 +118,8 @@ function App() {
     return <div className="flex h-full">{dom}</div>
   }
 
-  function ExpandedButtons(moreCharsList: string[]) {
-    return <>{ButtonsGroup(moreCharsList)}</>
+  function ExpandedButtons(onChangeHandler: Function, moreCharsList: string[]) {
+    return <>{ButtonsGroup(onChangeHandler, moreCharsList)}</>
   }
 
   return (
@@ -138,7 +146,7 @@ function App() {
           <label>{t('fields.startChar')}</label>
           <div>
             <div className="flex justify-end">
-              <div>{ButtonsGroup()}</div>
+              <div>{ButtonsGroup(updateStartChar)}</div>
               <TextInput
                 theme={customTheme}
                 type="text"
@@ -170,7 +178,9 @@ function App() {
               </div>
               <span>more default characters</span>
             </div>
-            {isStartCharListExpand ? <div className="ml-4">{ExpandedButtons(['☑', '✱', '■', '◆'])}</div> : null}
+            {isStartCharListExpand ? (
+              <div className="ml-4">{ExpandedButtons(updateStartChar, ['☑', '✱', '■', '◆'])}</div>
+            ) : null}
           </div>
         </div>
 
@@ -178,7 +188,7 @@ function App() {
           <label>{t('fields.endChar')}</label>
           <div>
             <div className="flex justify-end">
-              <div>{ButtonsGroup(['☆', '✧', '○'])}</div>
+              <div>{ButtonsGroup(updateEndChar, ['☆', '✧', '○'])}</div>
               <TextInput
                 theme={customTheme}
                 type="text"
@@ -210,7 +220,9 @@ function App() {
               </div>
               <span>more default characters</span>
             </div>
-            {isEndCharListExpand ? <div className="ml-4">{ExpandedButtons(['☐', '⁎', '□', '◇'])}</div> : null}
+            {isEndCharListExpand ? (
+              <div className="ml-4">{ExpandedButtons(updateEndChar, ['☐', '⁎', '□', '◇'])}</div>
+            ) : null}
           </div>
         </div>
 
