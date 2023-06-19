@@ -1,15 +1,19 @@
-import { useTranslation } from 'react-i18next'
-
 export const useCopy = () => {
-  const { t } = useTranslation()
   const copyContent = async (text: string) => {
+    const toastSuccess = document.querySelector('#notify-alert-copySuccess')
+    const toastDanger = document.querySelector('#notify-alert-copyError')
     try {
       await navigator.clipboard.writeText(text)
-      // TODO: use notify or sweet alert
-      alert(t('notify.alert.copySuccess'))
+      toastSuccess?.classList.remove('hidden')
+      setTimeout(function () {
+        toastSuccess?.classList.add('hidden')
+      }, 2000)
       console.log('Content copied to clipboard')
     } catch (err) {
-      alert(t('notify.alert.copyError'))
+      toastDanger?.classList.remove('hidden')
+      setTimeout(function () {
+        toastDanger?.classList.add('hidden')
+      }, 2000)
       console.error('Failed to copy: ', err)
     }
   }

@@ -1,11 +1,17 @@
 import notionLogo from '../src/assets/Notion_app_logo.png'
 import ProgressBar from './components/ProgressBar'
 import I18nToggle from './components/I18nToggle'
+import { ToastSuccess, ToastDanger } from './components/Toast'
 
 function App() {
   return (
     <>
       <main>
+        <section className="fixed top-20 w-full flex justify-center">
+          {ToastSuccess('notify.alert.copySuccess')}
+          {ToastDanger('notify.alert.copyError')}
+        </section>
+
         <nav className="flex justify-end items-center w-screen">
           <div className="fixed right-2 top-20">
             <I18nToggle />
