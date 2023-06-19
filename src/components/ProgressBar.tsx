@@ -30,6 +30,7 @@ function App() {
   const [endChar, setEndChar] = useState('☆')
   const [templateText, setTemplateText] = useState('')
   const [isStartCharListExpand, setIsStartCharListExpand] = useState(false)
+  const [isEndCharListExpand, setIsEndCharListExpand] = useState(false)
 
   const updateCurrentValueName = (e: ChangeEvent<HTMLInputElement>) => setCurrentValueName(e.target.value)
   const updateTotalValueName = (e: ChangeEvent<HTMLInputElement>) => setTotalValueName(e.target.value)
@@ -90,8 +91,27 @@ function App() {
     await copyContent(templateText)
   }
 
-  function onCharExpand() {
-    setIsStartCharListExpand(!isStartCharListExpand)
+  function ButtonsGroup(charsList?: string[]) {
+    const dom = []
+    const chars = charsList || ['★', '✦', '●']
+    chars.forEach((char) => {
+      dom.push(
+        <div key={'input' + char} className="h-full">
+          <input type="radio" id={char} name="hosting" value={char} className="hidden peer" required />
+          <label
+            htmlFor={char}
+            className="inline-flex items-center justify-between w-full h-full px-2.5 py-1 text-gray-500 bg-white border border-[#6B7280] rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-teal-500 peer-checked:border-teal-600 peer-checked:text-teal-600 peer-checked:bg-teal-100 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+          >
+            <span className="block">{char}</span>
+          </label>
+        </div>,
+      )
+    })
+    return <div className="flex h-full">{dom}</div>
+  }
+
+  function ExpandedButtons(moreCharsList: string[]) {
+    return <>{ButtonsGroup(moreCharsList)}</>
   }
 
   return (
@@ -118,16 +138,21 @@ function App() {
           <label>{t('fields.startChar')}</label>
           <div>
             <div className="flex justify-end">
-              {/* TODO: 3-buttons group here */}
+              <div>{ButtonsGroup()}</div>
               <TextInput
                 theme={customTheme}
                 type="text"
-                value={startChar}
+                // value={startChar}
                 onChange={updateStartChar}
                 placeholder="Enter manually"
               />
             </div>
-            <div className="my-2 flex items-center cursor-pointer" onClick={onCharExpand}>
+            <div
+              className="my-2 flex items-center cursor-pointer"
+              onClick={() => {
+                setIsStartCharListExpand(!isStartCharListExpand)
+              }}
+            >
               <div className={`flex mr-2 transform ${isStartCharListExpand ? 'rotate-90' : ''}`}>
                 <svg
                   className="w-3"
@@ -145,13 +170,48 @@ function App() {
               </div>
               <span>more default characters</span>
             </div>
-            {isStartCharListExpand ? <div>TODO: buttons group here</div> : null}
+            {isStartCharListExpand ? <div className="ml-4">{ExpandedButtons(['☑', '✱', '■', '◆'])}</div> : null}
           </div>
         </div>
 
         <div className={columClass}>
           <label>{t('fields.endChar')}</label>
-          <TextInput theme={customTheme} type="text" value={endChar} onChange={updateEndChar} />
+          <div>
+            <div className="flex justify-end">
+              <div>{ButtonsGroup(['☆', '✧', '○'])}</div>
+              <TextInput
+                theme={customTheme}
+                type="text"
+                // value={endChar}
+                onChange={updateEndChar}
+                placeholder="Enter manually"
+              />
+            </div>
+            <div
+              className="my-2 flex items-center cursor-pointer"
+              onClick={() => {
+                setIsEndCharListExpand(!isEndCharListExpand)
+              }}
+            >
+              <div className={`flex mr-2 transform ${isStartCharListExpand ? 'rotate-90' : ''}`}>
+                <svg
+                  className="w-3"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                  />
+                </svg>
+              </div>
+              <span>more default characters</span>
+            </div>
+            {isEndCharListExpand ? <div className="ml-4">{ExpandedButtons(['☐', '⁎', '□', '◇'])}</div> : null}
+          </div>
         </div>
 
         <div className={columClass}>
