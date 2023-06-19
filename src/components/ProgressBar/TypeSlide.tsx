@@ -79,7 +79,7 @@ function TypeSlide({ progressLength, startChar, endChar, currentValueName, total
       </div>
       <div className={columClass}>
         <div>
-          <span>{showValue()}</span> | {mapValueToProgress()}
+          {mapValueToProgress()} | <span>{showValue()}</span>
         </div>
       </div>
 

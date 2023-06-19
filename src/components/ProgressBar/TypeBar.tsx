@@ -71,7 +71,7 @@ function TypeBar({ progressLength, startChar, endChar, currentValueName, totalVa
       </div>
       <div className={columClass}>
         <div>
-          <span>{showValue()}</span> | {mapValueToProgress()}
+          {mapValueToProgress()} | <span>{showValue()}</span>
         </div>
       </div>
 
