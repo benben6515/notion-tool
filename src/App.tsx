@@ -1,5 +1,5 @@
 import notionLogo from '../src/assets/Notion_app_logo.png'
-import ProgressBar from './components/ProgressBar'
+import ProgressBar from './components/ProgressBar/ProgressBar'
 import I18nToggle from './components/I18nToggle'
 
 function App() {
