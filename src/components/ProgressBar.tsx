@@ -91,7 +91,27 @@ function App() {
     await copyContent(templateText)
   }
 
-  function ButtonsGroup(onChangeHandler: Function, charsList?: string[]) {
+  function toggleListIcon(isExpanded: boolean) {
+    return (
+      <div className={`flex mr-2 transform ${isExpanded ? 'rotate-90' : ''}`}>
+        <svg
+          className="w-3"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            clipRule="evenodd"
+            fillRule="evenodd"
+            d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+          />
+        </svg>
+      </div>
+    )
+  }
+
+  function ButtonsGroup(onChangeHandler: Function, charsList?: string[], name?: string) {
     const dom = []
     const chars = charsList || ['★', '✦', '●']
     chars.forEach((char) => {
@@ -100,7 +120,7 @@ function App() {
           <input
             type="radio"
             id={char}
-            name="hosting"
+            name={name || 'startChar'}
             value={char}
             className="hidden peer"
             required
@@ -116,10 +136,6 @@ function App() {
       )
     })
     return <div className="flex h-full">{dom}</div>
-  }
-
-  function ExpandedButtons(onChangeHandler: Function, moreCharsList: string[]) {
-    return <>{ButtonsGroup(onChangeHandler, moreCharsList)}</>
   }
 
   return (
@@ -161,25 +177,11 @@ function App() {
                 setIsStartCharListExpand(!isStartCharListExpand)
               }}
             >
-              <div className={`flex mr-2 transform ${isStartCharListExpand ? 'rotate-90' : ''}`}>
-                <svg
-                  className="w-3"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    clipRule="evenodd"
-                    fillRule="evenodd"
-                    d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
-                  />
-                </svg>
-              </div>
+              {toggleListIcon(isStartCharListExpand)}
               <span>more default characters</span>
             </div>
             {isStartCharListExpand ? (
-              <div className="ml-4">{ExpandedButtons(updateStartChar, ['☑', '✱', '■', '◆'])}</div>
+              <div className="ml-4">{ButtonsGroup(updateStartChar, ['☑', '✱', '■', '◆'])}</div>
             ) : null}
           </div>
         </div>
@@ -188,7 +190,7 @@ function App() {
           <label>{t('fields.endChar')}</label>
           <div>
             <div className="flex justify-end">
-              <div>{ButtonsGroup(updateEndChar, ['☆', '✧', '○'])}</div>
+              <div>{ButtonsGroup(updateEndChar, ['☆', '✧', '○'], 'endChar')}</div>
               <TextInput
                 theme={customTheme}
                 type="text"
@@ -203,25 +205,11 @@ function App() {
                 setIsEndCharListExpand(!isEndCharListExpand)
               }}
             >
-              <div className={`flex mr-2 transform ${isStartCharListExpand ? 'rotate-90' : ''}`}>
-                <svg
-                  className="w-3"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    clipRule="evenodd"
-                    fillRule="evenodd"
-                    d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
-                  />
-                </svg>
-              </div>
+              {toggleListIcon(isEndCharListExpand)}
               <span>more default characters</span>
             </div>
             {isEndCharListExpand ? (
-              <div className="ml-4">{ExpandedButtons(updateEndChar, ['☐', '⁎', '□', '◇'])}</div>
+              <div className="ml-4">{ButtonsGroup(updateEndChar, ['☐', '⁎', '□', '◇'], 'endChar')}</div>
             ) : null}
           </div>
         </div>
