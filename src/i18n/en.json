@@ -17,7 +17,9 @@
     "progressLengthTip": "Impact on Progress Bar Granularity: The current progress is displayed in a more detailed manner.",
     "preview": "Preview",
     "output": "Output",
-    "outputTip": "Click the text below to copy it."
+    "outputTip": "Click the text below to copy it.",
+    "enterCharacters": "Enter manually",
+    "toggleCharacters": "more default characters"
   },
   "notify": {
     "alert": {
