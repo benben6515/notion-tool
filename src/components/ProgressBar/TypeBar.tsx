@@ -15,6 +15,7 @@ function TypeBar({
   currentValueName,
   totalValueName,
   isShowNumber,
+  isFullBar,
 }: TypeBarPropsType) {
   const { t } = useTranslation()
   const { copyContent } = useCopy()
@@ -33,16 +34,19 @@ function TypeBar({
   useEffect(() => {
     const startString = Array(+progressLength).fill(startChar).join('')
     const endString = Array(+progressLength).fill(endChar).join('')
-    let numberText = isShowNumber
+    const numberText = isShowNumber
       ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%")`
       : ')'
+    const endTExt = isFullBar
+      ? `+ slice("${endString}", 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
+      : ''
     const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "✅"
 , slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
-+ slice("${endString}", 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
+${endTExt}
 ${numberText}
 `
     setTemplateText(text)
-  }, [progressLength, startChar, endChar, currentValueName, totalValueName, isShowNumber])
+  }, [progressLength, startChar, endChar, currentValueName, totalValueName, isShowNumber, isFullBar])
 
   function mapValueToProgress() {
     if (+currentValue < 0) return
@@ -50,7 +54,8 @@ ${numberText}
     const startCount = Math.floor((+currentValue / +totalValue) * +progressLength)
     const endCount = +progressLength - +startCount
     if (startCount < 0 || endCount < 0) return
-    return `${Array(startCount).fill(startChar).join('')}${Array(endCount).fill(endChar).join('')}`
+    const endText = isFullBar ? `${Array(endCount).fill(endChar).join('')}` : ''
+    return `${Array(startCount).fill(startChar).join('')}${endText}`
   }
 
   function showValue() {
@@ -77,7 +82,8 @@ ${numberText}
       </div>
       <div className={columClass}>
         <div className="break-all">
-          {mapValueToProgress()} | <span>{showValue()}</span>
+          {mapValueToProgress()}
+          {isShowNumber && <span> | {showValue()}</span>}
         </div>
       </div>
 

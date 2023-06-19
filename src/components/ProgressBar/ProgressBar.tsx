@@ -27,16 +27,20 @@ const endCharList = ['☆', '✧', '○']
 const extendEndCharList = ['☐', '⁎', '□', '◇']
 
 const TYPE_OPTIONS_MAP: TYPE_OPTIONS_MAP_TYPE = {
-  bar: {
-    label: 'Bar',
-    value: 'bar',
+  simpleBar: {
+    label: 'Simple Bar',
+    value: 'simpleBar',
+  },
+  fullBar: {
+    label: 'Full Bar',
+    value: 'fullBar',
   },
   slide: {
     label: 'Slide',
     value: 'slide',
   },
 }
-const TYPE_OPTIONS = [TYPE_OPTIONS_MAP.bar.value, TYPE_OPTIONS_MAP.slide.value]
+const TYPE_OPTIONS = [TYPE_OPTIONS_MAP.simpleBar.value, TYPE_OPTIONS_MAP.fullBar.value, TYPE_OPTIONS_MAP.slide.value]
 
 function App() {
   const { t } = useTranslation()
@@ -65,8 +69,10 @@ function App() {
   }, [t])
 
   const componentByType = () => {
+    if (!TYPE_OPTIONS_MAP?.[type]?.value) return
     switch (TYPE_OPTIONS_MAP[type].value) {
-      case TYPE_OPTIONS_MAP.bar.value:
+      case TYPE_OPTIONS_MAP.simpleBar.value:
+      case TYPE_OPTIONS_MAP.fullBar.value:
         return (
           <TypeBar
             progressLength={progressLength}
@@ -75,6 +81,7 @@ function App() {
             currentValueName={currentValueName}
             totalValueName={totalValueName}
             isShowNumber={isShowNumber}
+            isFullBar={TYPE_OPTIONS_MAP[type].value === TYPE_OPTIONS_MAP.fullBar.value}
           />
         )
       case TYPE_OPTIONS_MAP.slide.value:

@@ -32,7 +32,7 @@ function TypeSlide({
 
   useEffect(() => {
     const startString = Array(+progressLength).fill(startChar).join('')
-    let numberText = isShowNumber
+    const numberText = isShowNumber
       ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%")`
       : ')'
     const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "✅"
@@ -79,7 +79,8 @@ ${numberText}
       </div>
       <div className={columClass}>
         <div>
-          {mapValueToProgress()} | <span>{showValue()}</span>
+          {mapValueToProgress()}
+          {isShowNumber && <span> | {showValue()}</span>}
         </div>
       </div>
 
