@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEventHandler } from 'react'
 import type { ChangeEvent } from 'react'
 import '../i18n/config'
 import { useTranslation } from 'react-i18next'
@@ -111,7 +111,7 @@ function App() {
     )
   }
 
-  function ButtonsGroup(onChangeHandler: Function, charsList?: string[], name?: string) {
+  function ButtonsGroup(onChangeHandler: ChangeEventHandler<HTMLInputElement>, charsList?: string[], name?: string) {
     const dom: any[] = []
     const chars = charsList || ['★', '✦', '●']
     const isStartChar = !name
