@@ -114,6 +114,7 @@ function App() {
   function ButtonsGroup(onChangeHandler: Function, charsList?: string[], name?: string) {
     const dom = []
     const chars = charsList || ['★', '✦', '●']
+    const isStartChar = !name
     chars.forEach((char) => {
       dom.push(
         <div key={'input' + char} className="h-full">
@@ -121,6 +122,7 @@ function App() {
             type="radio"
             id={char}
             name={name || 'startChar'}
+            checked={char === (isStartChar ? startChar : endChar)}
             value={char}
             className="hidden peer"
             required
