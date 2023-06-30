@@ -10,7 +10,7 @@ import TypeBar from './TypeBar'
 import TypeSlide from './TypeSlide'
 import type { TYPE_OPTIONS_MAP_TYPE } from './types'
 
-export const columClass = 'py-3 w-full flex justify-between space-x-4'
+export const columClass = 'py-3 w-full flex justify-between space-x-4 lg:mx-md'
 export const customTheme: CustomFlowbiteTheme['textInput'] = {
   field: {
     input: {
@@ -21,12 +21,9 @@ export const customTheme: CustomFlowbiteTheme['textInput'] = {
   },
 }
 
-const startCharList = ['★', '✦', '●']
-const extendStartCharList = ['☑', '✱', '■', '◆']
-const endCharList = ['☆', '✧', '○']
-const extendEndCharList = ['☐', '⁎', '□', '◇']
-const doneCharList = ['✅', '👍', '🏁']
-const extendDoneCharList = ['☑', '✔', '✓']
+const extendStartCharList = ['★', '✦', '●', '☑', '✱', '■', '◆']
+const extendEndCharList = ['☆', '✧', '○', '☐', '⁎', '□', '◇']
+const extendDoneCharList = ['✅', '👍', '🏁', '☑', '✔', '✓']
 
 const TYPE_OPTIONS_MAP: TYPE_OPTIONS_MAP_TYPE = {
   simpleBar: {
@@ -49,9 +46,9 @@ function App() {
   const [totalValueName, setTotalValueName] = useState(t('fields.totalValue'))
   const [currentValueName, setCurrentValueName] = useState(t('fields.currentValue'))
   const [progressLength, setProgressLength] = useState('10')
-  const [startChar, setStartChar] = useState(startCharList[0])
-  const [endChar, setEndChar] = useState(endCharList[0])
-  const [doneChar, setDoneChar] = useState(doneCharList[0])
+  const [startChar, setStartChar] = useState(extendStartCharList[0])
+  const [endChar, setEndChar] = useState(extendEndCharList[0])
+  const [doneChar, setDoneChar] = useState(extendDoneCharList[0])
   const [type, setType] = useState(TYPE_OPTIONS[0])
   const [isShowNumber, setIsShowNumber] = useState(true)
 
@@ -144,10 +141,10 @@ function App() {
         throw new Error('unknown name')
     }
     return (
-      <div className="flex h-full">
+      <div className="flex h-full gap-x-1 justify-end">
         {charsList.map((char) => {
           return (
-            <div key={'input' + char} className="h-full">
+            <div key={'input' + char} className="h-full flex">
               <input
                 type="radio"
                 id={char}
@@ -176,35 +173,40 @@ function App() {
       <section className="w-full">
         <h3 className="text-teal-500 text-2xl font-bold pb-2">{t('progressBar')}</h3>
 
-        <div className={columClass}>
-          <label>{t('fields.totalValueName')}</label>
-          <TextInput theme={customTheme} type="text" value={totalValueName} min="1" onChange={updateTotalValueName} />
-        </div>
-        <div className={columClass}>
-          <label>{t('fields.currentValueName')}</label>
-          <TextInput
-            theme={customTheme}
-            type="text"
-            value={currentValueName}
-            min="1"
-            onChange={updateCurrentValueName}
-          />
-        </div>
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-8">
+          <div className={`${columClass}`}>
+            <label className="my-2">{t('fields.totalValueName')}</label>
+            <TextInput theme={customTheme} type="text" value={totalValueName} min="1" onChange={updateTotalValueName} />
+          </div>
 
-        <div className={columClass}>
-          <label>{t('fields.startChar')}</label>
+          <div className={columClass}>
+            <label className="my-2">{t('fields.currentValueName')}</label>
+            <TextInput
+              theme={customTheme}
+              type="text"
+              value={currentValueName}
+              min="1"
+              onChange={updateCurrentValueName}
+            />
+          </div>
+
           <div>
-            <div className="flex justify-end">
-              <div>{ButtonsGroup(updateStartChar, startCharList, 'startChar')}</div>
-              <TextInput
-                theme={customTheme}
-                type="text"
-                onChange={updateStartChar}
-                placeholder={t('fields.enterCharacters')}
-              />
+            <div className={columClass}>
+              <label className="my-2">{t('fields.startChar')}</label>
+              <div>
+                <div className="flex justify-end">
+                  <TextInput
+                    theme={customTheme}
+                    type="text"
+                    value={startChar}
+                    onChange={updateStartChar}
+                    placeholder={t('fields.enterCharacters')}
+                  />
+                </div>
+              </div>
             </div>
             <div
-              className="my-2 flex items-center cursor-pointer"
+              className="flex items-center cursor-pointer justify-end"
               onClick={() => setIsStartCharListExpand(!isStartCharListExpand)}
             >
               {toggleListIcon(isStartCharListExpand)}
@@ -214,22 +216,24 @@ function App() {
               <div className="ml-4">{ButtonsGroup(updateStartChar, extendStartCharList, 'startChar')}</div>
             )}
           </div>
-        </div>
 
-        <div className={columClass}>
-          <label>{t('fields.endChar')}</label>
           <div>
-            <div className="flex justify-end">
-              <div>{ButtonsGroup(updateEndChar, endCharList, 'endChar')}</div>
-              <TextInput
-                theme={customTheme}
-                type="text"
-                onChange={updateEndChar}
-                placeholder={t('fields.enterCharacters')}
-              />
+            <div className={columClass}>
+              <label className="my-2">{t('fields.endChar')}</label>
+              <div>
+                <div className="flex justify-end">
+                  <TextInput
+                    theme={customTheme}
+                    type="text"
+                    value={endChar}
+                    onChange={updateEndChar}
+                    placeholder={t('fields.enterCharacters')}
+                  />
+                </div>
+              </div>
             </div>
             <div
-              className="my-2 flex items-center cursor-pointer"
+              className="flex items-center cursor-pointer justify-end"
               onClick={() => setIsEndCharListExpand(!isEndCharListExpand)}
             >
               {toggleListIcon(isEndCharListExpand)}
@@ -239,22 +243,24 @@ function App() {
               <div className="ml-4">{ButtonsGroup(updateEndChar, extendEndCharList, 'endChar')}</div>
             )}
           </div>
-        </div>
 
-        <div className={columClass}>
-          <label>{t('fields.doneChar')}</label>
           <div>
-            <div className="flex justify-end">
-              <div>{ButtonsGroup(updateDoneChar, doneCharList, 'doneChar')}</div>
-              <TextInput
-                theme={customTheme}
-                type="text"
-                onChange={updateDoneChar}
-                placeholder={t('fields.enterCharacters')}
-              />
+            <div className={columClass}>
+              <label className="my-2">{t('fields.doneChar')}</label>
+              <div>
+                <div className="flex justify-end">
+                  <TextInput
+                    theme={customTheme}
+                    type="text"
+                    value={doneChar}
+                    onChange={updateDoneChar}
+                    placeholder={t('fields.enterCharacters')}
+                  />
+                </div>
+              </div>
             </div>
             <div
-              className="my-2 flex items-center cursor-pointer"
+              className="flex items-center cursor-pointer justify-end"
               onClick={() => setIsDoneCharListExpand(!isDoneCharListExpand)}
             >
               {toggleListIcon(isDoneCharListExpand)}
@@ -264,33 +270,44 @@ function App() {
               <div className="ml-4">{ButtonsGroup(updateDoneChar, extendDoneCharList, 'doneChar')}</div>
             )}
           </div>
-        </div>
 
-        <div className={columClass}>
-          <label className="flex items-center">
-            <span>{t('fields.progressLength')}</span>
-            <span className="flex ml-1">{LabelTooltip(t('fields.progressLengthTip'))}</span>
-          </label>
-          <TextInput theme={customTheme} type="number" value={progressLength} min="1" onChange={updateProgressLength} />
-        </div>
+          <div className={columClass}>
+            <label className="my-2">
+              <span>{t('fields.progressLength')}</span>
+              <span className="ml-1">{LabelTooltip(t('fields.progressLengthTip'))}</span>
+            </label>
+            <TextInput
+              theme={customTheme}
+              type="number"
+              value={progressLength}
+              min="1"
+              onChange={updateProgressLength}
+            />
+          </div>
 
-        <div className="py-4 w-full flex items-center space-x-4">
-          <label className="flex items-center">
-            <span>{t('fields.progressType')}</span>
-          </label>
-          <Select theme={customTheme} value={type} onChange={updateType}>
-            {TYPE_OPTIONS.map((e: keyof TYPE_OPTIONS_MAP_TYPE) => (
-              <option key={e} value={e}>
-                {TYPE_OPTIONS_MAP?.[e]?.label}
-              </option>
-            ))}
-          </Select>
-          <span> | </span>
-          <label className="flex items-center">
-            <span>{t('fields.isShowNumber')}</span>
-          </label>
-          <ToggleSwitch label={''} checked={isShowNumber} defaultChecked onChange={updateIsShowNumber} />
-          <span> | </span>
+          <div className="py-4 w-full flex items-center space-x-0 lg:col-span-2 flex-wrap">
+            <div className="flex justify-start items-center space-x-4 mr-2">
+              <label className="flex items-center">
+                <span>{t('fields.progressType')}</span>
+              </label>
+              <Select theme={customTheme} value={type} onChange={updateType}>
+                {TYPE_OPTIONS.map((e: keyof TYPE_OPTIONS_MAP_TYPE) => (
+                  <option key={e} value={e}>
+                    {TYPE_OPTIONS_MAP?.[e]?.label}
+                  </option>
+                ))}
+              </Select>
+              <span> | </span>
+            </div>
+
+            <div className="flex justify-start items-center">
+              <label className="flex items-center mr-4">
+                <span>{t('fields.isShowNumber')}</span>
+              </label>
+              <ToggleSwitch label={''} checked={isShowNumber} defaultChecked onChange={updateIsShowNumber} />
+              <span>| </span>
+            </div>
+          </div>
         </div>
 
         <hr />
