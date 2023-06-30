@@ -12,6 +12,7 @@
     "currentValueName": "現在值名稱",
     "startChar": "開始字元",
     "endChar": "結束字元",
+    "doneChar": "完成時字元",
     "isShowNumber": "是否呈現數字",
     "progressType": "進度條類型",
     "progressLength": "進度條總長",
@@ -25,7 +26,8 @@
   "notify": {
     "alert": {
       "copySuccess": "複製成功！",
-      "copyError": "複製失敗："
+      "copyError": "複製失敗：",
+      "konamiSuccess": "你發現了一個小彩蛋！"
     }
   }
 }

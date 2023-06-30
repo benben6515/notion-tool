@@ -12,6 +12,7 @@
     "currentValueName": "Current value name",
     "startChar": "Start char",
     "endChar": "End char",
+    "doneChar": "Done char",
     "isShowNumber": "Show number",
     "progressType": "Progress type",
     "progressLength": "Progress length",
@@ -25,7 +26,8 @@
   "notify": {
     "alert": {
       "copySuccess": "Content copied to clipboard!",
-      "copyError": "Failed to copy: "
+      "copyError": "Failed to copy: ",
+      "konamiSuccess": "Your found a Easter egg!"
     }
   }
 }

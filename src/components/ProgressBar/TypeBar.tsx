@@ -12,6 +12,7 @@ function TypeBar({
   progressLength,
   startChar,
   endChar,
+  doneChar,
   currentValueName,
   totalValueName,
   isShowNumber,
@@ -40,13 +41,13 @@ function TypeBar({
     const endTExt = isFullBar
       ? `+ slice("${endString}", 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
       : ''
-    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "✅"
+    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}"
 , slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
 ${endTExt}
 ${numberText}
 `
     setTemplateText(text)
-  }, [progressLength, startChar, endChar, currentValueName, totalValueName, isShowNumber, isFullBar])
+  }, [progressLength, startChar, endChar, doneChar, currentValueName, totalValueName, isShowNumber, isFullBar])
 
   function mapValueToProgress() {
     if (+currentValue < 0) return

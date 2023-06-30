@@ -12,6 +12,7 @@ function TypeSlide({
   progressLength,
   startChar,
   endChar,
+  doneChar,
   currentValueName,
   totalValueName,
   isShowNumber,
@@ -35,14 +36,14 @@ function TypeSlide({
     const numberText = isShowNumber
       ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%")`
       : ')'
-    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "✅"
+    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}"
 , slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
 + "${endChar}"
 + slice("${startString}", 1, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
 ${numberText}
 `
     setTemplateText(text)
-  }, [progressLength, startChar, endChar, currentValueName, totalValueName, isShowNumber])
+  }, [progressLength, startChar, endChar, doneChar, currentValueName, totalValueName, isShowNumber])
 
   function mapValueToProgress() {
     if (+currentValue < 0) return

@@ -25,6 +25,8 @@ const startCharList = ['★', '✦', '●']
 const extendStartCharList = ['☑', '✱', '■', '◆']
 const endCharList = ['☆', '✧', '○']
 const extendEndCharList = ['☐', '⁎', '□', '◇']
+const doneCharList = ['✅', '👍', '🏁']
+const extendDoneCharList = ['☑', '✔', '✓']
 
 const TYPE_OPTIONS_MAP: TYPE_OPTIONS_MAP_TYPE = {
   simpleBar: {
@@ -46,9 +48,10 @@ function App() {
   const { t } = useTranslation()
   const [totalValueName, setTotalValueName] = useState(t('fields.totalValue'))
   const [currentValueName, setCurrentValueName] = useState(t('fields.currentValue'))
-  const [progressLength, setProgressLength] = useState('15')
-  const [startChar, setStartChar] = useState('★')
-  const [endChar, setEndChar] = useState('☆')
+  const [progressLength, setProgressLength] = useState('10')
+  const [startChar, setStartChar] = useState(startCharList[0])
+  const [endChar, setEndChar] = useState(endCharList[0])
+  const [doneChar, setDoneChar] = useState(doneCharList[0])
   const [type, setType] = useState(TYPE_OPTIONS[0])
   const [isShowNumber, setIsShowNumber] = useState(true)
 
@@ -57,11 +60,13 @@ function App() {
   const updateProgressLength = (e: ChangeEvent<HTMLInputElement>) => setProgressLength(e.target.value)
   const updateStartChar = (e: ChangeEvent<HTMLInputElement>) => setStartChar(e.target.value)
   const updateEndChar = (e: ChangeEvent<HTMLInputElement>) => setEndChar(e.target.value)
+  const updateDoneChar = (e: ChangeEvent<HTMLInputElement>) => setDoneChar(e.target.value)
   const updateType = (e: ChangeEvent<HTMLSelectElement>) => setType(e.target.value)
   const updateIsShowNumber = (checked: boolean) => setIsShowNumber(checked)
 
   const [isStartCharListExpand, setIsStartCharListExpand] = useState(false)
   const [isEndCharListExpand, setIsEndCharListExpand] = useState(false)
+  const [isDoneCharListExpand, setIsDoneCharListExpand] = useState(false)
 
   useEffect(() => {
     setTotalValueName(t('fields.totalValue'))
@@ -78,6 +83,7 @@ function App() {
             progressLength={progressLength}
             startChar={startChar}
             endChar={endChar}
+            doneChar={doneChar}
             currentValueName={currentValueName}
             totalValueName={totalValueName}
             isShowNumber={isShowNumber}
@@ -90,6 +96,7 @@ function App() {
             progressLength={progressLength}
             startChar={startChar}
             endChar={endChar}
+            doneChar={doneChar}
             currentValueName={currentValueName}
             totalValueName={totalValueName}
             isShowNumber={isShowNumber}
@@ -122,7 +129,20 @@ function App() {
   }
 
   function ButtonsGroup(onChangeHandler: ChangeEventHandler<HTMLInputElement>, charsList: string[], name: string) {
-    const isStartChar = name === 'startChar'
+    let currentChar: string = ''
+    switch (name) {
+      case 'startChar':
+        currentChar = startChar
+        break
+      case 'endChar':
+        currentChar = endChar
+        break
+      case 'doneChar':
+        currentChar = doneChar
+        break
+      default:
+        throw new Error('unknown name')
+    }
     return (
       <div className="flex h-full">
         {charsList.map((char) => {
@@ -132,7 +152,7 @@ function App() {
                 type="radio"
                 id={char}
                 name={name}
-                checked={char === (isStartChar ? startChar : endChar)}
+                checked={char === currentChar}
                 value={char}
                 className="hidden peer"
                 required
@@ -190,9 +210,9 @@ function App() {
               {toggleListIcon(isStartCharListExpand)}
               <span>{t('fields.toggleCharacters')}</span>
             </div>
-            {isStartCharListExpand ? (
+            {isStartCharListExpand && (
               <div className="ml-4">{ButtonsGroup(updateStartChar, extendStartCharList, 'startChar')}</div>
-            ) : null}
+            )}
           </div>
         </div>
 
@@ -215,9 +235,34 @@ function App() {
               {toggleListIcon(isEndCharListExpand)}
               <span>{t('fields.toggleCharacters')}</span>
             </div>
-            {isEndCharListExpand ? (
+            {isEndCharListExpand && (
               <div className="ml-4">{ButtonsGroup(updateEndChar, extendEndCharList, 'endChar')}</div>
-            ) : null}
+            )}
+          </div>
+        </div>
+
+        <div className={columClass}>
+          <label>{t('fields.doneChar')}</label>
+          <div>
+            <div className="flex justify-end">
+              <div>{ButtonsGroup(updateDoneChar, doneCharList, 'doneChar')}</div>
+              <TextInput
+                theme={customTheme}
+                type="text"
+                onChange={updateDoneChar}
+                placeholder={t('fields.enterCharacters')}
+              />
+            </div>
+            <div
+              className="my-2 flex items-center cursor-pointer"
+              onClick={() => setIsDoneCharListExpand(!isDoneCharListExpand)}
+            >
+              {toggleListIcon(isDoneCharListExpand)}
+              <span>{t('fields.toggleCharacters')}</span>
+            </div>
+            {isDoneCharListExpand && (
+              <div className="ml-4">{ButtonsGroup(updateDoneChar, extendDoneCharList, 'doneChar')}</div>
+            )}
           </div>
         </div>
 
