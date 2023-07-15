@@ -38,14 +38,11 @@ function TypeBar({
     const numberText = isShowNumber
       ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%")`
       : ')'
-    const endTExt = isFullBar
+    const startText = `slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
+    const endText = isFullBar
       ? `+ slice("${endString}", 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
       : ''
-    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}"
-, slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
-${endTExt}
-${numberText}
-`
+    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}", ${startText} ${endText} ${numberText}`
     setTemplateText(text)
   }, [progressLength, startChar, endChar, doneChar, currentValueName, totalValueName, isShowNumber, isFullBar])
 
