@@ -36,12 +36,10 @@ function TypeSlide({
     const numberText = isShowNumber
       ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%")`
       : ')'
-    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}"
-, slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
-+ "${endChar}"
-+ slice("${startString}", 1, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))
-${numberText}
-`
+    const firstHalfText = `slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
+    const secondHalfText = `slice("${startString}", 1, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
+    const slideText = `${firstHalfText} + "${endChar}" + ${secondHalfText}`
+    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}", ${slideText} ${numberText}`
     setTemplateText(text)
   }, [progressLength, startChar, endChar, doneChar, currentValueName, totalValueName, isShowNumber])
 
