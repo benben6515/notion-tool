@@ -49,7 +49,7 @@ pnpm dev
 
 ## 致謝
 
-特北感謝:
+> 特北感謝:
 
 <div style="display: flex">
   <a href="https://github.com/benben6515" style="margin-right: 1rem">
@@ -61,6 +61,16 @@ pnpm dev
     <div>Peter</div>
   </a>
 </div>
+
+> 感謝:
+
+<div style="display: flex">
+  <a href="https://github.com/rockyooooooo" style="margin-right: 1rem">
+      <img src="https://avatars.githubusercontent.com/u/77043048?s=30&v=4" style="border-radius: 50%;" />
+  </a>
+</div>
+
+<hr />
 
 希望可以讓使用者提高 notion 的生產力，可以把專注力用在更多地方。
 

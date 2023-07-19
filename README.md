@@ -49,7 +49,7 @@ pnpm dev
 
 ## Credit
 
-Especial thanks:
+> Especial thanks:
 
 <div style="display: flex">
   <a href="https://github.com/benben6515" style="margin-right: 1rem">
@@ -61,6 +61,16 @@ Especial thanks:
     <div>Peter</div>
   </a>
 </div>
+
+> Thanks:
+
+<div style="display: flex">
+  <a href="https://github.com/rockyooooooo" style="margin-right: 1rem">
+      <img src="https://avatars.githubusercontent.com/u/77043048?s=30&v=4" style="border-radius: 50%;" />
+  </a>
+</div>
+
+<hr />
 
 We hope this notion tools can help you boost your productivity.
 
