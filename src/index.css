@@ -143,3 +143,30 @@ body {
     background-position: 200% center;
   }
 }
+
+@keyframes breath-effect {
+  from {
+    filter: blur(10px);
+    transform: scale(1.1) center;
+  }
+  to {
+    filter: blur(15px);
+    transform: scale(1.25) center;
+  }
+}
+.breath_effect__inner {
+  animation: breath-effect 3s ease-in-out infinite alternate;
+}
+.breath_effect__outer {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(0%, -50%);
+}
+
+.breath_effect__outer__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

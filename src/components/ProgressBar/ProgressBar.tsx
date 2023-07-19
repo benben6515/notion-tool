@@ -172,8 +172,11 @@ function App() {
 
   return (
     <>
-      <section className="w-full">
-        <h3 className="text-teal-500 text-2xl font-bold pb-2">{t('progressBar')}</h3>
+      <section className="w-full relative">
+        <div className="relative">
+          <h3 className="text-teal-500 text-2xl font-bold pb-2 breath_effect__outer">{t('progressBar')}</h3>
+          <h3 className="text-teal-500 text-2xl font-bold pb-2 breath_effect__inner">{t('progressBar')}</h3>
+        </div>
 
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-8">
           <div className={`${columClass}`}>

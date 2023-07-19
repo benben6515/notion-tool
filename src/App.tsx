@@ -1,13 +1,14 @@
 import notionLogo from '../src/assets/Notion_app_logo.png'
 import ProgressBar from './components/ProgressBar/ProgressBar'
 import I18nToggle from './components/I18nToggle'
+import AppFooter from './components/AppFooter'
 import KonamiCode from './components/KonamiCode'
 import { ToastSuccess, ToastDanger } from './components/Toast'
 
 function App() {
   return (
     <>
-      <main className="main">
+      <main className="main min-h-screen">
         <nav className="flex justify-end items-center w-screen">
           <div className="fixed right-2 top-20">
             <I18nToggle />
@@ -30,6 +31,7 @@ function App() {
 
         <KonamiCode />
       </main>
+      <AppFooter />
     </>
   )
 }

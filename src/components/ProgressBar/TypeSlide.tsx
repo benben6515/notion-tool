@@ -86,9 +86,15 @@ function TypeSlide({
       </div>
       <div className={columClass}>
         <div></div>
-        <div>
-          {mapValueToProgress()}
-          {isShowNumber && <span> | {showValue()}</span>}
+        <div className="relative">
+          <div className="break-all breath_effect__inner">
+            {mapValueToProgress()}
+            {isShowNumber && <span> | {showValue()}</span>}
+          </div>
+          <div className="break-all breath_effect__outer">
+            {mapValueToProgress()}
+            {isShowNumber && <span> | {showValue()}</span>}
+          </div>
         </div>
       </div>
 
@@ -99,9 +105,9 @@ function TypeSlide({
       <div className={columClass}>
         <button
           onClick={onClickOutput}
-          className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          className="block p-6 bg-white border border-2 border-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-800 dark:border-blue-900 dark:hover:bg-gray-700 shadow-[2px_2px_10px_5px_rgba(200,200,255,0.15)]"
         >
-          <p className="font-normal text-gray-700 dark:text-gray-400 text-start">{templateText}</p>
+          <p className="font-normal text-gray-800 dark:text-gray-300 text-start break-all">{templateText}</p>
         </button>
       </div>
     </>
