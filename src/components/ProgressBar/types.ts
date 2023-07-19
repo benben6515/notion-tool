@@ -6,6 +6,7 @@ export type TypeBarPropsType = {
   currentValueName: string
   totalValueName: string
   isShowNumber: boolean
+  isShowDone: boolean
   isFullBar?: boolean
 }
 
@@ -15,3 +16,6 @@ export type TYPE_OPTIONS_MAP_TYPE = {
     value: string
   }
 }
+
+export type CharList = string[]
+export type CharListType = 'simpleBar' | 'fullBar' | 'slide'

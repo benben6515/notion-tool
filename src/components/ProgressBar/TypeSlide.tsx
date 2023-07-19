@@ -16,12 +16,13 @@ function TypeSlide({
   currentValueName,
   totalValueName,
   isShowNumber,
+  isShowDone,
 }: TypeBarPropsType) {
   const { t } = useTranslation()
   const { copyContent } = useCopy()
 
   const [totalValue, setTotalValue] = useState('100')
-  const [currentValue, setCurrentValue] = useState('20')
+  const [currentValue, setCurrentValue] = useState('42')
   const [templateText, setTemplateText] = useState('')
 
   const updateCurrentValue = (e: ChangeEvent<HTMLInputElement>) => setCurrentValue(e.target.value)
@@ -33,15 +34,21 @@ function TypeSlide({
 
   useEffect(() => {
     const startString = Array(+progressLength).fill(startChar).join('')
-    const numberText = isShowNumber
-      ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%")`
-      : ')'
-    const firstHalfText = `slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
-    const secondHalfText = `slice("${startString}", 1, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
+    const firstHalfText = `slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${startChar.length})`
+
+    const secondHalfText = `slice("${startString}", 0, if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${startChar.length}))`
+
     const slideText = `${firstHalfText} + "${endChar}" + ${secondHalfText}`
-    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}", ${slideText} ${numberText}`
+
+    const numberText = isShowNumber
+      ? ` + " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%"`
+      : ''
+
+    const text = isShowDone
+      ? `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}", ${slideText}${numberText})`
+      : `${slideText}${numberText}`
     setTemplateText(text)
-  }, [progressLength, startChar, endChar, doneChar, currentValueName, totalValueName, isShowNumber])
+  }, [progressLength, startChar, endChar, doneChar, currentValueName, totalValueName, isShowNumber, isShowDone])
 
   function mapValueToProgress() {
     if (+currentValue < 0) return
@@ -51,6 +58,7 @@ function TypeSlide({
     if (startCount < 0 || endCount < 0) return
     const charArray = Array(+progressLength).fill(startChar)
     charArray.splice(startCount, 1, endChar)
+    if (isShowDone && +currentValue >= +totalValue) return doneChar
     return `${charArray.join('')}`
   }
 
@@ -77,6 +85,7 @@ function TypeSlide({
         </span>
       </div>
       <div className={columClass}>
+        <div></div>
         <div>
           {mapValueToProgress()}
           {isShowNumber && <span> | {showValue()}</span>}

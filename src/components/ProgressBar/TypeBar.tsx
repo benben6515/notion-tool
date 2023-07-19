@@ -16,13 +16,14 @@ function TypeBar({
   currentValueName,
   totalValueName,
   isShowNumber,
+  isShowDone,
   isFullBar,
 }: TypeBarPropsType) {
   const { t } = useTranslation()
   const { copyContent } = useCopy()
 
   const [totalValue, setTotalValue] = useState('100')
-  const [currentValue, setCurrentValue] = useState('20')
+  const [currentValue, setCurrentValue] = useState('42')
   const [templateText, setTemplateText] = useState('')
 
   const updateCurrentValue = (e: ChangeEvent<HTMLInputElement>) => setCurrentValue(e.target.value)
@@ -35,16 +36,29 @@ function TypeBar({
   useEffect(() => {
     const startString = Array(+progressLength).fill(startChar).join('')
     const endString = Array(+progressLength).fill(endChar).join('')
-    const numberText = isShowNumber
-      ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%")`
-      : ')'
-    const startText = `slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
+    const startText = `slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}")  * ${progressLength}) * ${startChar.length})`
+
     const endText = isFullBar
-      ? `+ slice("${endString}", 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}))`
+      ? ` + slice("${endString}", 0, if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${endChar.length}))`
       : ''
-    const text = `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}", ${startText} ${endText} ${numberText}`
+    const numberText = isShowNumber
+      ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%"`
+      : ''
+    const text = isShowDone
+      ? `if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "${doneChar}", ${startText} ${endText}${numberText})`
+      : `${startText}${endText}${numberText}`
     setTemplateText(text)
-  }, [progressLength, startChar, endChar, doneChar, currentValueName, totalValueName, isShowNumber, isFullBar])
+  }, [
+    progressLength,
+    startChar,
+    endChar,
+    doneChar,
+    currentValueName,
+    totalValueName,
+    isShowNumber,
+    isShowDone,
+    isFullBar,
+  ])
 
   function mapValueToProgress() {
     if (+currentValue < 0) return
@@ -53,6 +67,7 @@ function TypeBar({
     const endCount = +progressLength - +startCount
     if (startCount < 0 || endCount < 0) return
     const endText = isFullBar ? `${Array(endCount).fill(endChar).join('')}` : ''
+    if (isShowDone && +currentValue >= +totalValue) return doneChar
     return `${Array(startCount).fill(startChar).join('')}${endText}`
   }
 
@@ -79,6 +94,7 @@ function TypeBar({
         </span>
       </div>
       <div className={columClass}>
+        <div></div>
         <div className="break-all">
           {mapValueToProgress()}
           {isShowNumber && <span> | {showValue()}</span>}

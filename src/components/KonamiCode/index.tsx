@@ -13,10 +13,9 @@ function KonamiCode() {
   const [currentKeyArray, setCurrentKeyArray] = useState<string[]>([])
 
   function onKeyDown(e: globalThis.KeyboardEvent): void {
-    console.log(e)
     const key = e.key
     const keyArray = [...currentKeyArray, key]
-    setCurrentKeyArray(keyArray)
+    setCurrentKeyArray(keyArray.slice(-10))
   }
 
   function showEffect() {
@@ -73,7 +72,6 @@ function KonamiCode() {
   }
 
   useEffect(() => {
-    console.log(currentKeyArray)
     if (!currentKeyArray.length) return
     const codeString = currentKeyArray.join(',')
 

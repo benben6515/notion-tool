@@ -8,7 +8,7 @@ import { TextInput, Select, ToggleSwitch } from 'flowbite-react'
 import LabelTooltip from '../Tooltips/LabelTooltip'
 import TypeBar from './TypeBar'
 import TypeSlide from './TypeSlide'
-import type { TYPE_OPTIONS_MAP_TYPE } from './types'
+import type { TYPE_OPTIONS_MAP_TYPE, CharList, CharListType } from './types'
 
 export const columClass = 'py-3 w-full flex justify-between space-x-4 lg:mx-md'
 export const customTheme: CustomFlowbiteTheme['textInput'] = {
@@ -21,9 +21,17 @@ export const customTheme: CustomFlowbiteTheme['textInput'] = {
   },
 }
 
-const extendStartCharList = ['★', '✦', '●', '☑', '✱', '■', '◆']
-const extendEndCharList = ['☆', '✧', '○', '☐', '⁎', '□', '◇']
-const extendDoneCharList = ['✅', '👍', '🏁', '☑', '✔', '✓']
+const extendStartCharList: Record<CharListType, CharList> = {
+  simpleBar: ['★', '✦', '●', '☑', '✱', '■', '◆'],
+  fullBar: ['★', '✦', '●', '☑', '✱', '■', '◆', '🔥'],
+  slide: ['=', '-', '_', '+'],
+}
+const extendEndCharList: Record<CharListType, CharList> = {
+  simpleBar: ['☆', '✧', '○', '☐', '⁎', '□', '◇'],
+  fullBar: ['☆', '✧', '○', '☐', '⁎', '□', '◇', '🌱'],
+  slide: ['🌱', '🌳', '🚩', '🚧', '📍', '🔥', '🎖️', '🚀'],
+}
+const extendDoneCharList: CharList = ['✅', '👍', '🏁', '☑', '✔', '✓']
 
 const TYPE_OPTIONS_MAP: TYPE_OPTIONS_MAP_TYPE = {
   simpleBar: {
@@ -46,11 +54,12 @@ function App() {
   const [totalValueName, setTotalValueName] = useState(t('fields.totalValue'))
   const [currentValueName, setCurrentValueName] = useState(t('fields.currentValue'))
   const [progressLength, setProgressLength] = useState('10')
-  const [startChar, setStartChar] = useState(extendStartCharList[0])
-  const [endChar, setEndChar] = useState(extendEndCharList[0])
-  const [doneChar, setDoneChar] = useState(extendDoneCharList[0])
   const [type, setType] = useState(TYPE_OPTIONS[0])
+  const [startChar, setStartChar] = useState(extendStartCharList[type as CharListType][0])
+  const [endChar, setEndChar] = useState(extendEndCharList[type as CharListType][0])
+  const [doneChar, setDoneChar] = useState(extendDoneCharList[0])
   const [isShowNumber, setIsShowNumber] = useState(true)
+  const [isShowDone, setIsShowDone] = useState(true)
 
   const updateCurrentValueName = (e: ChangeEvent<HTMLInputElement>) => setCurrentValueName(e.target.value)
   const updateTotalValueName = (e: ChangeEvent<HTMLInputElement>) => setTotalValueName(e.target.value)
@@ -60,6 +69,7 @@ function App() {
   const updateDoneChar = (e: ChangeEvent<HTMLInputElement>) => setDoneChar(e.target.value)
   const updateType = (e: ChangeEvent<HTMLSelectElement>) => setType(e.target.value)
   const updateIsShowNumber = (checked: boolean) => setIsShowNumber(checked)
+  const updateIsShowDone = (checked: boolean) => setIsShowDone(checked)
 
   const [isStartCharListExpand, setIsStartCharListExpand] = useState(false)
   const [isEndCharListExpand, setIsEndCharListExpand] = useState(false)
@@ -84,6 +94,7 @@ function App() {
             currentValueName={currentValueName}
             totalValueName={totalValueName}
             isShowNumber={isShowNumber}
+            isShowDone={isShowDone}
             isFullBar={TYPE_OPTIONS_MAP[type].value === TYPE_OPTIONS_MAP.fullBar.value}
           />
         )
@@ -97,6 +108,7 @@ function App() {
             currentValueName={currentValueName}
             totalValueName={totalValueName}
             isShowNumber={isShowNumber}
+            isShowDone={isShowDone}
           />
         )
       default:
@@ -125,45 +137,35 @@ function App() {
     )
   }
 
-  function ButtonsGroup(onChangeHandler: ChangeEventHandler<HTMLInputElement>, charsList: string[], name: string) {
-    let currentChar: string = ''
-    switch (name) {
-      case 'startChar':
-        currentChar = startChar
-        break
-      case 'endChar':
-        currentChar = endChar
-        break
-      case 'doneChar':
-        currentChar = doneChar
-        break
-      default:
-        throw new Error('unknown name')
-    }
+  function ButtonsGroup(
+    onChangeHandler: ChangeEventHandler<HTMLInputElement>,
+    currentChar: string,
+    charsList: string[],
+    name: string,
+  ) {
     return (
       <div className="flex h-full gap-x-1 justify-end">
-        {charsList.map((char) => {
-          return (
-            <div key={'input' + char} className="h-full flex">
-              <input
-                type="radio"
-                id={char}
-                name={name}
-                checked={char === currentChar}
-                value={char}
-                className="hidden peer"
-                required
-                onChange={onChangeHandler}
-              />
-              <label
-                htmlFor={char}
-                className="inline-flex items-center justify-between w-full h-full px-2.5 py-1 text-gray-500 bg-white border border-[#6B7280] rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-white dark:peer-checked:bg-[#666666] peer-checked:border-teal-600 dark:peer-checked:border-[#666666] peer-checked:text-teal-600 peer-checked:bg-teal-100 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-[#3B3B3B] dark:hover:bg-gray-700"
-              >
-                <span className="block">{char}</span>
-              </label>
-            </div>
-          )
-        })}
+        {charsList.map((char) => (
+          <div key={'input-' + name + char} className="h-full flex">
+            <input
+              type="radio"
+              id={name + char}
+              key={'input-options-' + name + char}
+              name={name}
+              value={char}
+              checked={char === currentChar}
+              className="hidden peer"
+              required
+              onChange={onChangeHandler}
+            />
+            <label
+              htmlFor={name + char}
+              className="inline-flex items-center justify-between w-full h-full px-2.5 py-1 text-gray-500 bg-white border border-[#6B7280] rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-white dark:peer-checked:bg-[#666666] peer-checked:border-teal-600 dark:peer-checked:border-[#666666] peer-checked:text-teal-600 peer-checked:bg-teal-100 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-[#3B3B3B] dark:hover:bg-gray-700"
+            >
+              <span className="block">{char}</span>
+            </label>
+          </div>
+        ))}
       </div>
     )
   }
@@ -213,7 +215,9 @@ function App() {
               <span>{t('fields.toggleCharacters')}</span>
             </div>
             {isStartCharListExpand && (
-              <div className="ml-4">{ButtonsGroup(updateStartChar, extendStartCharList, 'startChar')}</div>
+              <div className="ml-4">
+                {ButtonsGroup(updateStartChar, startChar, extendStartCharList[type as CharListType], 'startChar')}
+              </div>
             )}
           </div>
 
@@ -240,7 +244,9 @@ function App() {
               <span>{t('fields.toggleCharacters')}</span>
             </div>
             {isEndCharListExpand && (
-              <div className="ml-4">{ButtonsGroup(updateEndChar, extendEndCharList, 'endChar')}</div>
+              <div className="ml-4">
+                {ButtonsGroup(updateEndChar, endChar, extendEndCharList[type as CharListType], 'endChar')}
+              </div>
             )}
           </div>
 
@@ -267,7 +273,7 @@ function App() {
               <span>{t('fields.toggleCharacters')}</span>
             </div>
             {isDoneCharListExpand && (
-              <div className="ml-4">{ButtonsGroup(updateDoneChar, extendDoneCharList, 'doneChar')}</div>
+              <div className="ml-4">{ButtonsGroup(updateDoneChar, doneChar, extendDoneCharList, 'doneChar')}</div>
             )}
           </div>
 
@@ -286,7 +292,7 @@ function App() {
           </div>
 
           <div className="py-4 w-full flex items-center space-x-0 lg:col-span-2 flex-wrap">
-            <div className="flex justify-start items-center space-x-4 mr-2">
+            <div className="flex justify-start items-center space-x-4 mr-2 my-2">
               <label className="flex items-center">
                 <span>{t('fields.progressType')}</span>
               </label>
@@ -300,12 +306,19 @@ function App() {
               <span> | </span>
             </div>
 
-            <div className="flex justify-start items-center">
-              <label className="flex items-center mr-4">
+            <div className="flex justify-start items-center my-2">
+              <label className="flex items-center mr-2">
                 <span>{t('fields.isShowNumber')}</span>
               </label>
               <ToggleSwitch label={''} checked={isShowNumber} defaultChecked onChange={updateIsShowNumber} />
-              <span>| </span>
+              <span> | </span>
+            </div>
+
+            <div className="flex justify-start items-center my-2">
+              <label className="flex items-center ml-2 mr-2">
+                <span>{t('fields.isShowDone')}</span>
+              </label>
+              <ToggleSwitch label={''} checked={isShowDone} defaultChecked onChange={updateIsShowDone} />
             </div>
           </div>
         </div>
