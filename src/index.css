@@ -23,7 +23,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  hieght: 100%;
+  height: 100%;
 }
 #root {
   overflow: hidden;
@@ -91,13 +91,13 @@ body {
   position: relative;
 }
 
-// kanomi code
+/* kanomi code */
 .cover-wrap {
-  opcity: 0;
+  opacity: 0;
 }
 
 .cover-wrap.is-show {
-  opcity: 1;
+  opacity: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -169,4 +169,31 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.icon-moon {
+  transform: rotateZ(-60deg) rotateY(180deg);
+}
+
+.animate-dark-mode {
+  animation: rotateZ0to180 600ms linear both;
+}
+
+.animate-dark-mode-continue {
+  animation: rotateZ180to360 600ms linear both;
+}
+
+@keyframes rotateZ0to180 {
+  to {
+    transform: rotateZ(180deg);
+  }
+}
+
+@keyframes rotateZ180to360 {
+  from {
+    transform: rotateZ(180deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
 }
