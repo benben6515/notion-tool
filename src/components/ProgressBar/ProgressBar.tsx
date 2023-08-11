@@ -8,6 +8,7 @@ import { TextInput, Select, ToggleSwitch } from 'flowbite-react'
 import LabelTooltip from '../Tooltips/LabelTooltip'
 import TypeBar from './TypeBar'
 import TypeSlide from './TypeSlide'
+import TypeMoon from './TypeMoon'
 import type { TYPE_OPTIONS_MAP_TYPE, CharList, CharListType } from './types'
 
 export const columClass = 'py-3 w-full flex justify-between space-x-4 lg:mx-md'
@@ -23,13 +24,15 @@ export const customTheme: CustomFlowbiteTheme['textInput'] = {
 
 const extendStartCharList: Record<CharListType, CharList> = {
   simpleBar: ['★', '✦', '●', '☑', '✱', '■', '◆'],
-  fullBar: ['★', '✦', '●', '☑', '✱', '■', '◆', '🔥'],
+  fullBar: ['★', '✦', '●', '☑', '✱', '■', '◆', '🔥', '🌕'],
   slide: ['=', '-', '_', '+'],
+  moon: ['🌕'],
 }
 const extendEndCharList: Record<CharListType, CharList> = {
   simpleBar: ['☆', '✧', '○', '☐', '⁎', '□', '◇'],
-  fullBar: ['☆', '✧', '○', '☐', '⁎', '□', '◇', '🌱'],
+  fullBar: ['☆', '✧', '○', '☐', '⁎', '□', '◇', '🌱', '🌑'],
   slide: ['🌱', '🌳', '🚩', '🚧', '📍', '🔥', '🎖️', '🚀'],
+  moon: ['🌑'],
 }
 const extendDoneCharList: CharList = ['✅', '👍', '🏁', '☑', '✔', '✓']
 
@@ -46,8 +49,17 @@ const TYPE_OPTIONS_MAP: TYPE_OPTIONS_MAP_TYPE = {
     label: 'Slide',
     value: 'slide',
   },
+  moon: {
+    label: 'Moon (Special) 🌕',
+    value: 'moon',
+  },
 }
-const TYPE_OPTIONS = [TYPE_OPTIONS_MAP.simpleBar.value, TYPE_OPTIONS_MAP.fullBar.value, TYPE_OPTIONS_MAP.slide.value]
+const TYPE_OPTIONS = [
+  TYPE_OPTIONS_MAP.simpleBar.value,
+  TYPE_OPTIONS_MAP.fullBar.value,
+  TYPE_OPTIONS_MAP.slide.value,
+  TYPE_OPTIONS_MAP.moon.value,
+]
 
 function App() {
   const { t } = useTranslation()
@@ -80,6 +92,14 @@ function App() {
     setCurrentValueName(t('fields.currentValue'))
   }, [t])
 
+  useEffect(() => {
+    if (type === TYPE_OPTIONS_MAP.moon.value) {
+      setProgressLength('10')
+    }
+    setStartChar(extendStartCharList[type as CharListType][0])
+    setEndChar(extendEndCharList[type as CharListType][0])
+  }, [type])
+
   const componentByType = () => {
     if (!TYPE_OPTIONS_MAP?.[type]?.value) return
     switch (TYPE_OPTIONS_MAP[type].value) {
@@ -101,6 +121,19 @@ function App() {
       case TYPE_OPTIONS_MAP.slide.value:
         return (
           <TypeSlide
+            progressLength={progressLength}
+            startChar={startChar}
+            endChar={endChar}
+            doneChar={doneChar}
+            currentValueName={currentValueName}
+            totalValueName={totalValueName}
+            isShowNumber={isShowNumber}
+            isShowDone={isShowDone}
+          />
+        )
+      case TYPE_OPTIONS_MAP.moon.value:
+        return (
+          <TypeMoon
             progressLength={progressLength}
             startChar={startChar}
             endChar={endChar}
@@ -206,6 +239,7 @@ function App() {
                     value={startChar}
                     onChange={updateStartChar}
                     placeholder={t('fields.enterCharacters')}
+                    disabled={type === TYPE_OPTIONS_MAP.moon.value}
                   />
                 </div>
               </div>
@@ -235,6 +269,7 @@ function App() {
                     value={endChar}
                     onChange={updateEndChar}
                     placeholder={t('fields.enterCharacters')}
+                    disabled={type === TYPE_OPTIONS_MAP.moon.value}
                   />
                 </div>
               </div>
@@ -291,6 +326,7 @@ function App() {
               value={progressLength}
               min="1"
               onChange={updateProgressLength}
+              disabled={type === TYPE_OPTIONS_MAP.moon.value}
             />
           </div>
 

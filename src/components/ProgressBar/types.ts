@@ -18,4 +18,4 @@ export type TYPE_OPTIONS_MAP_TYPE = {
 }
 
 export type CharList = string[]
-export type CharListType = 'simpleBar' | 'fullBar' | 'slide'
+export type CharListType = 'simpleBar' | 'fullBar' | 'slide' | 'moon'
