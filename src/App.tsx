@@ -9,7 +9,7 @@ import { ToastSuccess, ToastDanger } from './components/Toast'
 function App() {
   return (
     <>
-      <main className="main min-h-screen bg-white dark:bg-[#242424]">
+      <main className="main min-h-screen bg-[#fafafa] dark:bg-[#2a2a2a]">
         <nav className="flex justify-end items-center w-screen">
           <div className="fixed right-2 top-20">
             <I18nToggle />
