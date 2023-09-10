@@ -34,9 +34,9 @@ function TypeSlide({
 
   useEffect(() => {
     const startString = Array(+progressLength).fill(startChar).join('')
-    const firstHalfText = `slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${startChar.length})`
+    const firstHalfText = `slice("${startString}".split(""), 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${startChar.length}).join("")`
 
-    const secondHalfText = `slice("${startString}", 0, if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${startChar.length}))`
+    const secondHalfText = `slice("${startString}".split(""), 0, if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${startChar.length})).join("")`
 
     const slideText = `${firstHalfText} + "${endChar}" + ${secondHalfText}`
 

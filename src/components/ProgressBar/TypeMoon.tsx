@@ -36,10 +36,10 @@ function TypeBar({
     const startString = Array(+progressLength).fill(startChar).join('')
     const endString = Array(+progressLength).fill(endChar).join('')
 
-    const startText = `slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${startChar.length})`
-    const endText = ` + slice("${endString}", 0, if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, 0, floor(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${endChar.length}))`
+    const startText = `slice("${startString}".split(""), 0, floor(prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${startChar.length}).join("")`
+    const endText = ` + slice("${endString}".split(""), 0, if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, 0, floor(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${endChar.length})).join("")`
 
-    const middleText = `+ if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "", slice("🌑🌘🌗🌖🌕", floor(mod(prop("${currentValueName}") * 10, prop("${totalValueName}")) / prop("${totalValueName}") / 0.25) * 2, floor(mod(prop("${currentValueName}") * 10, prop("${totalValueName}")) / prop("${totalValueName}") / 0.25) * 2 + 2))`
+    const middleText = `+ if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, "", slice("🌑🌘🌗🌖🌕".split(""), floor(mod(prop("${currentValueName}") * 10, prop("${totalValueName}")) / prop("${totalValueName}") / 0.25) * 2, floor(mod(prop("${currentValueName}") * 10, prop("${totalValueName}")) / prop("${totalValueName}") / 0.25) * 2 + 2).join(""))`
 
     const numberText = isShowNumber
       ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%"`

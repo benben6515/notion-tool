@@ -36,10 +36,10 @@ function TypeBar({
   useEffect(() => {
     const startString = Array(+progressLength).fill(startChar).join('')
     const endString = Array(+progressLength).fill(endChar).join('')
-    const startText = `slice("${startString}", 0, floor(prop("${currentValueName}") / prop("${totalValueName}")  * ${progressLength}) * ${startChar.length})`
+    const startText = `slice("${startString}".split(""), 0, floor(prop("${currentValueName}") / prop("${totalValueName}")  * ${progressLength}) * ${startChar.length}).join("")`
 
     const endText = isFullBar
-      ? ` + slice("${endString}", 0, if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${endChar.length}))`
+      ? ` + slice("${endString}".split(""), 0, if(prop("${currentValueName}") / prop("${totalValueName}") >= 1, 0, ceil(${progressLength} - prop("${currentValueName}") / prop("${totalValueName}") * ${progressLength}) * ${endChar.length})).join("")`
       : ''
     const numberText = isShowNumber
       ? `+ " | " + format(floor(prop("${currentValueName}") / prop("${totalValueName}") * 100)) + "%"`
