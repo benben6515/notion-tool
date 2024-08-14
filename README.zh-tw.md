@@ -17,6 +17,39 @@
 1. 進度條公式
 2. TODO: 如果你有其他想法或是建議也可以跟我們說
 
+## 如何使用
+
+- 讓你的 Notion 進度條閃亮亮！
+- 簡點點幾下、還可以客製化
+- 只需要複製/貼上，搞定 🎉
+
+<div align="center">
+  <video src="./public/images/how-to-use.mov" width="720" controls>How to use</video>
+</div>
+
+## 功能
+
+- 支援深色模式
+- 支援中/英文
+- 預覽進度條
+
+<div align="center">
+  <video src="./public/images/features.mov" width="720" controls>Features</video>
+</div>
+
+## 客製化
+
+製做屬於自己的 Notion 進度條吧！
+
+1. 首先確保你的 **Notion 欄位名稱** 跟 **小工具中的欄位名稱** 一致
+2. 選擇你要的表情符號，當然你也可以使用 **任何你想要的表情符號**
+3. 然後複製/貼上到你的 **Notion 公式**
+4. 享受你獨一無二的進度條 🎉
+
+<div align="center">
+  <video src="./public/images/customize.mov" width="720" controls>Customize</video>
+</div>
+
 ## 技術棧 & 開發
 
 - React

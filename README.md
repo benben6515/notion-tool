@@ -17,6 +17,39 @@ We hope this notion tools can help you boost your productivity.
 1. progress bar
 2. TODO: if you have any idea or wanted feature
 
+## How to use
+
+- Make your notion progress bar shinny!
+- Easy to use with few click and customizing setting.
+- Copy/paste and enjoy 🎉
+
+<div align="center">
+  <video src="./public/images/how-to-use.mov" width="720" controls>How to use</video>
+</div>
+
+## Features
+
+- Dark theme support
+- English/Chinese support
+- Preview your progress bar
+
+<div align="center">
+  <video src="./public/images/features.mov" width="720" controls>Features</video>
+</div>
+
+## Customize
+
+Customize your own progress bar!
+
+1. Make sure your **column name** is match to **this tool's name**.
+2. Select some emoji you wanted. You also can use **any emoji** you wanted.
+3. Just copy/paste to your **Notion Formula**
+4. Enjoy your unique notion progress bar 🎉
+
+<div align="center">
+  <video src="./public/images/customize.mov" width="720" controls>Customize</video>
+</div>
+
 ## Tech stack & Dev
 
 - React
@@ -49,7 +82,7 @@ pnpm dev
 
 ## Credit
 
-> Especial thanks:
+> Especially thanks:
 
 <div style="display: flex">
   <a href="https://github.com/benben6515" style="margin-right: 1rem">
