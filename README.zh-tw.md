@@ -23,9 +23,7 @@
 - 簡點點幾下、還可以客製化
 - 只需要複製/貼上，搞定 🎉
 
-<div align="center">
-  <video src="./public/images/how-to-use.mov" width="720" controls>How to use</video>
-</div>
+https://github.com/user-attachments/assets/f683336f-a2c4-4acf-abf5-ed7fd00c9e8f
 
 ## 功能
 
@@ -33,9 +31,7 @@
 - 支援中/英文
 - 預覽進度條
 
-<div align="center">
-  <video src="./public/images/features.mov" width="720" controls>Features</video>
-</div>
+https://github.com/user-attachments/assets/d013b31d-c71a-47bd-b4bd-2681955e3eed
 
 ## 客製化
 
@@ -46,9 +42,7 @@
 3. 然後複製/貼上到你的 **Notion 公式**
 4. 享受你獨一無二的進度條 🎉
 
-<div align="center">
-  <video src="./public/images/customize.mov" width="720" controls>Customize</video>
-</div>
+https://github.com/user-attachments/assets/dfe16561-db96-4147-a2ed-a2fe1d22c036
 
 ## 技術棧 & 開發
 
