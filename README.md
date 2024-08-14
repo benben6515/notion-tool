@@ -23,9 +23,7 @@ We hope this notion tools can help you boost your productivity.
 - Easy to use with few click and customizing setting.
 - Copy/paste and enjoy 🎉
 
-<div align="center">
-  <video src="./public/images/how-to-use.mov" width="720" controls>How to use</video>
-</div>
+https://github.com/user-attachments/assets/f683336f-a2c4-4acf-abf5-ed7fd00c9e8f
 
 ## Features
 
@@ -33,9 +31,7 @@ We hope this notion tools can help you boost your productivity.
 - English/Chinese support
 - Preview your progress bar
 
-<div align="center">
-  <video src="./public/images/features.mov" width="720" controls>Features</video>
-</div>
+https://github.com/user-attachments/assets/d013b31d-c71a-47bd-b4bd-2681955e3eed
 
 ## Customize
 
@@ -46,9 +42,7 @@ Customize your own progress bar!
 3. Just copy/paste to your **Notion Formula**
 4. Enjoy your unique notion progress bar 🎉
 
-<div align="center">
-  <video src="./public/images/customize.mov" width="720" controls>Customize</video>
-</div>
+https://github.com/user-attachments/assets/dfe16561-db96-4147-a2ed-a2fe1d22c036
 
 ## Tech stack & Dev
 
