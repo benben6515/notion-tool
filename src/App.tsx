@@ -1,4 +1,4 @@
-import notionLogo from '../src/assets/Notion_app_logo.png'
+// import notionLogo from '../src/assets/Notion_app_logo.png'
 import ProgressBar from './components/ProgressBar/ProgressBar'
 import I18nToggle from './components/I18nToggle'
 import DarkModeToggle from './components/DarkModeToggle'
@@ -19,9 +19,9 @@ function App() {
 
         <section className="flex flex-col justify-center items-center pb-8 w-3/4 max-w-3xl mx-auto text-[#213547] dark:text-white">
           <div className="w-40 h-40 pa-8 flex justify-center z-0">
-            <a href="https://notion.so" target="_blank">
-              <img src={notionLogo} className="logo notion" alt="Notion logo" />
-            </a>
+            {/* <a href="https://notion.so" target="_blank"> */}
+            {/*   <img src={notionLogo} className="logo notion" alt="Notion logo" /> */}
+            {/* </a> */}
           </div>
           <ProgressBar />
         </section>
