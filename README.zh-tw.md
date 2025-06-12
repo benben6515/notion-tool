@@ -1,4 +1,4 @@
-# notion-tool
+# progress maker
 
 > 一些 notion 小工具
 
